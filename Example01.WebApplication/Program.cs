@@ -28,16 +28,29 @@ WebApplication app = builder.Build();
 //}); 
 #endregion
 
-app.MapDefaultControllerRoute();// https://localhost:1234/
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+app.UseHsts();
 
-//app.MapControllerRoute(
-//    name: "default", 
-//    pattern: "api/{action=Merhaba}/{controller=Anasayfa}/{sayfaNo?}"
-//    );
+//app.MapDefaultControllerRoute();// https://localhost:1234/
+
+//app.UseRouting();
+
+//app.MapGet("/", () => "Hello world");
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{test?}"
+    );
 
 //app.MapControllerRoute(
 //    name: "admin",
 //    pattern: "admin/{controller=Anasayfa}/{action=Merhaba}/{sayfaNo?}"
 //    );
+
+//app.UseEndpoints(endpoints =>
+//{
+//    app.MapGet("/hakkimizda", () => "Hakkımızda sayfası");
+//});
 
 app.Run();

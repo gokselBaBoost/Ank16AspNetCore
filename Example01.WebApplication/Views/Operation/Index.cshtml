@@ -1,0 +1,172 @@
+﻿@using Example01.WebApplication.Library
+
+@model List<Person>
+
+@*
+    Bu satırlar razor view Engin için yorum satırlarıdır.
+*@
+@functions{
+
+    int Topla(int num1, int num2){
+        return num1 + num2;
+    }
+}
+
+@{
+    int sayi1 = (new Random().Next(100)) + 1;
+    int sayi2 = (new Random().Next(100)) + 1;
+
+    int sonuc = sayi1 + sayi2;
+
+    int[] sayilar = [15, 26, 45, 10, 19, 4, 91];
+
+    int[] red = new int[10];
+    int[] green = new int[10];
+    int[] blue = new int[10];
+
+
+    for (int i = 0; i < 10; i++)
+    {
+        red[i] = new Random().Next(256);
+        green[i] = new Random().Next(256);
+        blue[i] = new Random().Next(256);
+    }
+
+
+    // List<Person> people = new List<Person>();
+    // people.Add(new Person() { Id = 1, Name = "Göksel", Surname = "Kalyoncu" });
+    // people.Add(new Person() { Id = 2, Name = "Kazım", Surname = "Kalyoncu" });
+    // people.Add(new Person() { Id = 3, Name = "Kazım Göksel", Surname = "Kalyoncu" });
+
+
+    //string countPeople = $"Toplam :{people.Count}";
+    string countPeople = $"Toplam :{Model.Count}";
+
+    Console.WriteLine($"Sonuc:{sonuc}");
+}
+
+<p>@(sayi1) + @(sayi2+1) = @sonuc+1</p>
+<p>@(sayi1) + @(sayi2) = @(sayi1 + sayi2)</p>
+
+@Html.Raw($"<b>Sonuc:</b>{sonuc}")
+
+<p>Sonuc:@sonuc</p>
+
+@if (sonuc % 2 == 0)
+{
+    <p style="color:red; font-weight:bolder">Sonuç çifttir.</p>
+}
+else
+{
+    <p style="color:green; font-weight:bolder">Sonuç tektir.</p>
+}
+
+<ul>
+    @for (int i = 0; i < sayilar.Length; i++)
+    {
+        <li>@sayilar[i]</li>
+    }
+</ul>
+
+@{
+    int j = 0;
+}
+@while (j < 10)
+{
+    <span style="width:10px; height:10px; border:1px solid black; margin-left:2px; background-color:rgb(@red[j],@green[j],@blue[j])">test</span>
+
+    j++;
+}
+
+@try
+{
+    int num1 = 10;
+    int num2 = 0;
+
+    int result = num1 / num2;
+}
+catch (Exception ex)
+{
+   <p style="color:red; font-weight:bolder">@ex.Message</p>
+}
+finally
+{
+    <p>@Topla(25,15)</p>   
+}
+
+
+<table>
+
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Birth Date of Month</th>
+        </tr>
+    </thead>
+    <tbody>
+        @* @foreach (Person person in people) *@
+        @foreach (Person person in Model)
+        {
+            <tr>
+                <td>@person.Id</td>
+                <td>@person.Name</td>
+                <td>@person.Surname</td>
+                <td>
+                    @switch (person.BirthDate.Month)
+                    {
+                        case 0:
+                            <span>Ocak</span>
+                            break;
+                        case 1:
+                            <span>Şubat</span>
+                            break;
+                        case 2:
+                            <span>Mart</span>
+                            break;
+                        case 3:
+                            <span>Nisan</span>
+                            break;
+                        case 4:
+                            <span>Mayıs</span>
+                            break;
+                        case 5:
+                            <span>Haziran</span>
+                            break;
+                        case 6:
+                            <span>Temmuz</span>
+                            break;
+                        case 7:
+                            <span>Ağustos</span>
+                            break;
+                        case 8:
+                            <span>Eylül</span>
+                            break;
+                        case 9:
+                            <span>Ekim</span>
+                            break;
+                        case 10:
+                            <span>Kasım</span>
+                            break;
+                        case 11:
+                            <span>Aralık</span>
+                            break;
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3" style="text-align:right">@countPeople</td>
+        </tr>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Surname</th>
+        </tr>
+    </tfoot>
+
+</table>
+
