@@ -8,6 +8,43 @@ Projeyi durdurunuz.
 
 3 tane route oluþturacaðýz
 GET tipinde olacak
-	hakkimizda  => http://localhost:1903/hakkimizda
-	iletisim  => http://localhost:1903/iletisim
-	projeler  => http://localhost:1903/projeler
+	hakkimizda  => http://localhost:1903/hakkimizda => Hakkýmýzda sayfasýna hoþ geldiniz
+	iletisim  => http://localhost:1903/iletisim => Ýletiþim sayfasýna hoþ geldiniz
+	projeler  => http://localhost:1903/projeler => Projeler sayfasýna hoþ geldiniz
+
+
+/ Ana Route da yazdýðýmýz yazýyý return olacak þekilde düzenleyelim.
+
+
+Örn: app.MapGet("/", () =>{
+	return ...
+});
+
+app.MapGet("/", () => "Hello World");
+
+/ Ana Route da Return içinde yazdýðýmýz bir yazýyý html tagý ile 
+kalýn olarak yazalým. Çalýþmadýðýný görelim :)
+Çalýþmasý için bir az düþüneli ;)
+
+/ Ana Route yazdýðýmýz içeriði aþaðýda ki þekilde güncelleyelim
+
+3 tane html link i oluþturalým
+	- Hakkýmýzda -> gideceði adres http://localhost:xxx/hakkimizda
+	- Ýletiþim -> gideceði adres http://localhost:xxx/iletisim
+	- Projeler -> gideceði adres http://localhost:xxx/projeler
+
+
+Projemize Controller ve Views yapýsýný ekleyiniz.
+
+Default Route yapýsný dahil ediniz.
+
+CSS,JS vb statik sayfalarýn çalýþmasý için gerekli ayarý dahil ediniz.
+
+
+Yukarýda ilk yapýlan MapGet adreslerinin tamamý için ilgili Controllerlarý
+oluþturun.
+
+Anasayfa için kullandýðýnýz Controller da ki index sayfasýnda diðer sayfalarýn
+linkleri olsun ve bu sayfalarda da anasayafa giden bir link olsun
+
+
