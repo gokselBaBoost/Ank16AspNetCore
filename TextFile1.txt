@@ -1,0 +1,13 @@
+Alýþtýrma - 1
+
+ASP.Net Core Empty Projesi açýnýz.
+Projeyi çalýþtýrýn Web browserda "Hello World" Yazýsýný görünüz.
+
+Projeyi durdurunuz.
+/ ana route için yazýlan ekran çýktýsý "Hello World" ü deðiþtiriniz.
+
+3 tane route oluþturacaðýz
+GET tipinde olacak
+	hakkimizda  => http://localhost:1903/hakkimizda
+	iletisim  => http://localhost:1903/iletisim
+	projeler  => http://localhost:1903/projeler

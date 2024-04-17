@@ -1,0 +1,49 @@
+﻿@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+
+    string message = "Merhaba dünya";
+
+    SelectListItem selectListItem1 = new SelectListItem() { Text = "Pazartesi", Value = "1" };
+    SelectListItem selectListItem2 = new SelectListItem() { Text = "Salı", Value = "2" };
+    SelectListItem selectListItem3 = new SelectListItem() { Text = "Çarşamba", Value = "3" };
+    SelectListItem selectListItem4 = new SelectListItem() { Text = "Perşembe", Value = "4" };
+    SelectListItem selectListItem5 = new SelectListItem() { Text = "Cuma", Value = "5" };
+
+    List<SelectListItem> listItems = new List<SelectListItem>();
+    listItems.Add(selectListItem1);
+    listItems.Add(selectListItem2);
+    listItems.Add(selectListItem3);
+    listItems.Add(selectListItem4);
+    listItems.Add(selectListItem5);
+}
+<p>@message</p>
+
+@Html.ActionLink("Hakkımızda","About","Home")
+@Html.ActionLink("Google", null, null, null, null, null, null,  new { @class = "link", href = "https://www.google.com" })
+
+@{
+    Html.BeginForm("Kayit2", "Home", FormMethod.Get);
+}
+@Html.CheckBox("cbox")
+@Html.TextBox("tbox","Göksel",new { style="color:red", id="txtAdi"})
+Kadın @Html.RadioButton("rbutton", "Kadın", true, new { @class = "txtAdi" })
+Erkek @Html.RadioButton("rbutton", "Erkek", false, new { @class = "txtAdi" })
+@Html.DropDownList("ddList", listItems, new { @class = "txtAdi", style="background-color:red" })
+@Html.Label("tbox")
+<input type="submit" />
+@{
+    Html.EndForm();
+}
+
+<form method="post" action="/" >
+
+</form>
+
+@Html.ActionLink("İletişim","Contact","Deneme")
+
+<a href="/Home/Contact">İletişim</a>
+
+<a asp-action="Contact" asp-controller="Home">İletişim Tag Helper</a>

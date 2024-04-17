@@ -1,0 +1,17 @@
+﻿@model string
+
+@if(Model is null)
+{
+    <form action="/Home/Contact" method="post">
+        <label for="ad">Ad</label> <input type="text" name="ad" id="ad" /> <br/>
+        <label for="soyad">Soyad</label> <input type="text" name="soyad" id="soyad" /> <br />
+        <label for="eposta">Eposta</label> <input type="text" name="eposta" id="eposta" /> <br />
+        <label for="mesaj">Mesajınız</label> <textarea name="mesaj" id="mesaj"></textarea> <br />
+        <input type="submit" value="Kaydet" />
+    </form>
+}
+else
+{
+    <p>@Model</p>
+}
+
