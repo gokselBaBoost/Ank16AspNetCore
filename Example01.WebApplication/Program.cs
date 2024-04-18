@@ -32,7 +32,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseHsts();
 
-//app.MapDefaultControllerRoute();// https://localhost:1234/
+app.MapDefaultControllerRoute();// https://localhost:1234/
 
 //app.UseRouting();
 
