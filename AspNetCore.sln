@@ -13,10 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example03.WebApplication", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Uygulamalar", "Uygulamalar", "{DCED2C06-C63E-46C3-8B1B-9C1FDA0B9C24}"
 	ProjectSection(SolutionItems) = preProject
-		TextFile1.txt = TextFile1.txt
+		17.04.2024.txt = 17.04.2024.txt
+		18.04.2024.txt = 18.04.2024.txt
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example04.WebApplication", "Example04.WebApplication\Example04.WebApplication.csproj", "{0293D39A-63C8-4578-AE72-0174AD90B66E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example04.WebApplication", "Example04.WebApplication\Example04.WebApplication.csproj", "{0293D39A-63C8-4578-AE72-0174AD90B66E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
