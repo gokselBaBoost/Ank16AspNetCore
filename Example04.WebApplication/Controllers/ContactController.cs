@@ -1,5 +1,6 @@
 ﻿using Example04.WebApplication.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Example04.WebApplication.Controllers
 {
@@ -10,6 +11,46 @@ namespace Example04.WebApplication.Controllers
         {
             ViewBag.Menuler = GetMenus();
             ViewBag.AltMenuler = GetSubMenus();
+
+            return View();
+        }
+
+        public IActionResult Contact()
+        {
+            ViewBag.Menuler = GetMenus();
+            ViewBag.AltMenuler = GetSubMenus();
+
+            return View();
+        }
+
+        [HttpPost]
+        //public IActionResult SaveMessage() // Parametresiz çağrılırsa HttpContext.Request.Form dan okunur.
+        //public IActionResult SaveMessage(IFormCollection form) Direk olarak FormCollection parametresi ile alma
+        //public IActionResult SaveMessage(string adi, string soyadi, string mesaj)
+        public IActionResult SaveMessage(Contact contactMessage)
+        {
+            //var request = HttpContext.Request;
+
+            ViewBag.Menuler = GetMenus();
+            ViewBag.AltMenuler = GetSubMenus();
+
+            //IFormCollection form = HttpContext.Request.Form;
+
+            //string adi = form["Adi"];
+            //string soyadi = form["Soyadi"];
+            //string mesaj = form["Mesaj"];
+
+            //var query = HttpContext.Request.Query;
+            //var route = HttpContext.Request.RouteValues;
+
+            //ViewBag.Name = adi;
+            //ViewBag.Surname = soyadi;
+            //ViewBag.Message = mesaj;
+
+            ViewBag.Name = contactMessage.Adi;
+            ViewBag.Surname = contactMessage.Soyadi;
+            ViewBag.Message = contactMessage.Mesaj;
+
             return View();
         }
 

@@ -1,8 +1,13 @@
-﻿namespace Example04.WebApplication.Models
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+
+namespace Example04.WebApplication.Models
 {
     public class Contact
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
+        public string Adi { get; set; }
+        public string Soyadi { get; set; }
+
+        [BindNever]
+        public string Mesaj { get; set; }
     }
 }

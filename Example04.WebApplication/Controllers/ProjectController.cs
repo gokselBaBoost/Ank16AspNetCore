@@ -9,6 +9,7 @@ namespace Example04.WebApplication.Controllers
         {
             ViewBag.Menuler = GetMenus();
             ViewBag.AltMenuler = GetSubMenus();
+
             return View();
         }
         private List<Menu> GetMenus()
