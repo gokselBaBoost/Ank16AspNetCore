@@ -1,0 +1,26 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using (Html.BeginForm("Login", "Home", FormMethod.Post))
+{
+    @Html.TextBox("adi", "", new { @class = "form-control" })
+    @Html.TextBox("soyadi", "", new { @class = "form-control" })
+    @Html.TextBox("eposta", "", new { @class = "form-control" })
+    @Html.Raw("<input type=\"submit\" value=\"Kaydet\" />")
+}
+
+
+
+<cache enabled="true" expires-on="@new DateTime(2024,4,18,00,40,00)">
+    Current Time Inside Cache Tag Helper: @DateTime.Now
+</cache>
+<br />
+<cache enabled="true" expires-after="@TimeSpan.FromSeconds(30)">
+    Current Time Inside Cache Tag Helper: @DateTime.Now
+</cache>
+<br />
+<cache enabled="true" expires-sliding="@TimeSpan.FromSeconds(10)">
+    Current Time Inside Cache Tag Helper: @DateTime.Now
+</cache>
+<br />
+<cache enabled="false">
+    Current Time Inside Cache Tag Helper: @DateTime.Now
+</cache>
