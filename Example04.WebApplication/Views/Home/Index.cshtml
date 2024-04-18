@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "Anasayfa";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <cache enabled=true expires-sliding="@TimeSpan.FromSeconds(10)">
+        <img src="@ViewBag.Resim" />
+        </cache>
+    </div>
+    <div class="col-md-8">
+        <h1>@ViewBag.Baslik</h1>
+        @* <cache enabled=true expires-on="@new DateTime(2024,4,18,14,36,00)"> *@
+        @* <cache enabled=true expires-after="@TimeSpan.FromSeconds(30)"> *@
+        <cache enabled=true expires-sliding="@TimeSpan.FromSeconds(10)">
+            <p>@ViewBag.Icerik</p>
+            <p>@DateTime.Now</p>
+        </cache>
+
+    </div>
+</div>
+@* @{
+    ViewData["Title"] = "ANASAYFA BÜYÜK";
+}
+<div class="row">
+    <div class="col-md-4">
+        <img src="@ViewData["Resim"]" />
+    </div>
+    <div class="col-md-8">
+        <h1>@ViewData["Baslik"]</h1>
+        <p>@ViewData["Icerik"]</p>
+    </div>
+</div>
+@{
+    ViewBag.Title = "anasayfa küçük";
+} *@

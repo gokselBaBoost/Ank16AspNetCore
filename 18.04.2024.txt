@@ -1,0 +1,36 @@
+Görevler
+01. AspNet.Core Empty Projesi Açýnýz.
+02. Controller ve Views yapýsýný projeye entegre ediniz.
+03. Controller yapýsýna uygun varsayýlan Rotayý dahil ediniz.
+04. Statik Dosyalarý kullanmak için gerekli ayarý yapýnýz.
+05. Aþaðýda ki Controllerlarý oluþturunuz.
+	- Home
+	- Student
+	- Teacher
+	- Lesson
+06. Home için Aþaðýdaki Actionlarý ve viewlarýný oluþturunuz.
+	- Index
+	- About
+	- Contact
+	- Help
+07. Student için Aþaðýdaki Actionlarý ve viewlarýný oluþturunuz.
+	- Index
+	- Add
+08. Teacher için Aþaðýdaki Actionlarý ve viewlarýný oluþturunuz.
+	- Index
+	- Add
+09. Lesson için Aþaðýdaki Actionlarý ve viewlarýný oluþturunuz.
+	- Index
+	- Add
+10. Tüm Controllerlar için Ortak menü tasarýmý ve view yapýsýný
+	sisteme entegre ediniz. Boostrap ý projenize css ve js dosylarýný
+	ekleyerek dahil ediniz.
+11. Menü için yapacaðýnýz linkleri Tag Helper yardýmý ile yapýnýz.
+12. Student Add view için aþaðýda ki istenirleri alan bir 
+	form tasarlayýnýz. HtmlHelper ile oluþturunuz.
+	- Adý
+	- Soyadý
+	- Email
+	- Doðum Tarihi
+	- Cinsiyeti
+	- Favori Arabasý

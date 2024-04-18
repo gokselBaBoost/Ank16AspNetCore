@@ -1,0 +1,14 @@
+﻿<div class="row">
+    <div class="col-3">
+        <img src="https://picsum.photos/id/237/200/200" class="rounded rounded-circle" />
+    </div>
+    <div class="col-9">
+        @* <form asp-action="SaveMessage" asp-route-id="15" asp-route-parametre="abc" asp-route-size="123" asp-route-status="false"> *@
+        <form asp-action="SaveMessage">
+        <input name="Adi" type="text" class="form-control" placeholder="First name" aria-label="First name">
+        <input name="Soyadi" type="text" class="form-control" placeholder="Last name" aria-label="Last name">
+        <textarea class="form-control" name="Mesaj"></textarea>
+        <input type="submit" class="btn btn-primary" />
+        </form>
+    </div>
+</div>
