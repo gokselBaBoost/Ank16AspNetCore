@@ -1,0 +1,51 @@
+﻿@model Student
+@{
+    //ViewBag.Title = "Bu seferde buradan değiştim.";
+    string title = ViewData["Baslik"].ToString();
+
+
+
+}
+
+<h1 class="m-3">@title.ToUpper()</h1>
+
+<div class="row mt-5">
+    <div class="col-3">
+
+    </div>
+    <div class="col-9">
+        <form asp-controller="Student" asp-action="Create">
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label">@Html.DisplayNameFor(m => m.Name)</label>
+                <input asp-for="Name" class="form-control" placeholder="@Html.DisplayNameFor(m => m.Name)">
+
+@*                 <label for="Name" class="form-label">Adınız</label>
+                <input name="Name" id="Name" class="form-control" placeholder="Adınız"> *@
+            </div>
+            <div class="mb-3">
+                <label asp-for="Surname" class="form-label">@Html.DisplayNameFor(m => m.Surname)</label>
+                <input asp-for="Surname" class="form-control" placeholder="@Html.DisplayNameFor(m => m.Surname)">
+            </div>
+            <div class="mb-3">
+                <label asp-for="Email" class="form-label">@Html.DisplayNameFor(m => m.Email)</label>
+                <input asp-for="Email" class="form-control" placeholder="@Html.DisplayNameFor(m => m.Email)">
+            </div>
+            <div class="mb-3">
+                <label asp-for="BirthDate" class="form-label">@Html.DisplayNameFor(m => m.BirthDate)</label>
+                <input asp-for="BirthDate" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label asp-for="Gender" class="form-label">@Html.DisplayNameFor(m => m.Gender)</label>
+                <select asp-for="Gender" asp-items="Html.GetEnumSelectList<Gender>()" class="form-select"></select>
+            </div>
+            <div class="mb-3">
+                <label asp-for="StudentStatus" class="form-label">@Html.DisplayNameFor(m => m.StudentStatus)</label>
+                <select asp-for="StudentStatus" asp-items="Html.GetEnumSelectList<StudentStatus>()" class="form-select"></select>
+            </div>
+            <div class="mb-3">
+                <input type="submit" class="btn btn-primary" value="Kaydet" />
+                <input type="reset" class="btn btn-secondary" value="Kaydet" />
+            </div>
+        </form>
+    </div>
+</div>
