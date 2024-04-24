@@ -1,0 +1,48 @@
+﻿@model List<Otel>
+
+
+<a asp-controller="Hotel" asp-action="Create" class="btn btn-success">Ekle</a>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Adı</th>
+            <th scope="col">Açıklama</th>
+            <th scope="col">Telefon</th>
+            <th scope="col">İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (Otel otel in Model)
+        {
+            <tr>
+                <td scope="row">@otel.Id</td>
+                <td>@otel.Name</td>
+                <td>@otel.Description</td>
+                <td>@otel.Phone</td>
+                <td>
+                    <a asp-controller="Hotel" asp-action="Details" asp-route-id="@otel.Id" class="btn btn-primary">Detay</a>
+                    <a asp-controller="Hotel" asp-action="Edit" asp-route-id="@otel.Id" class="btn btn-warning">Düzenle</a>
+                    <a asp-controller="Hotel" asp-action="Delete" asp-route-id="@otel.Id" class="btn btn-danger">Sil</a>
+                </td>
+            </tr>
+        }
+
+            
+        
+
+    </tbody>
+    <tfoot>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Adı</th>
+            <th scope="col">Açıklama</th>
+            <th scope="col">Telefon</th>
+            <th scope="col">İşlemler</th>
+        </tr>
+    </tfoot>
+
+</table>

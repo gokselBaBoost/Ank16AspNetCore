@@ -13,4 +13,10 @@ app.UseStaticFiles();
 
 app.MapDefaultControllerRoute();
 
+//app.MapControllerRoute(name: "yeniRota", pattern: "{action=Index}/{controller=Home}/{id?}");
+
+// News/Breaking/5?cat=Sport&subCat=Bundesliga
+
+// News/Breaking/Sport/Budesliga/5 => /Controller/Action/CatName/SubCatNem/id?
+
 app.Run();

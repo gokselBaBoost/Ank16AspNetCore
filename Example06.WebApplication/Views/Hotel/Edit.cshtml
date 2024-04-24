@@ -1,0 +1,15 @@
+﻿@model Otel
+
+<div class="row">
+
+    <div class="col">
+        <form asp-controller="Hotel" asp-action="Edit">
+            <label asp-for="Name">@Html.DisplayNameFor(m => m.Name)</label> <input asp-for="Name" class="form-control" /> <br />
+            <label asp-for="Description">@Html.DisplayNameFor(m => m.Description)</label> <input asp-for="Description" class="form-control" /> <br />
+            <label asp-for="Phone">@Html.DisplayNameFor(m => m.Phone)</label> <input asp-for="Phone" class="form-control" /> <br />
+
+            <input type="submit" value="kaydet" class="btn btn-success" />
+        </form>
+    </div>
+
+</div>
