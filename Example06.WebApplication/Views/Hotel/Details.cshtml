@@ -1,0 +1,16 @@
+﻿@model Hotel
+
+<div class="row">
+     <div class="col">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">@Model.Name</h5>
+                <h6 class="card-subtitle mb-2 text-body-secondary">@Model.Phone</h6>
+                <p class="card-text">@Model.Description</p>
+                <a asp-controller="Hotel" asp-action="Edit" asp-route-id="@Model.Id" class="card-link text-success">Düzenle</a>
+                <a asp-controller="Hotel" asp-action="DeleteConfirm2" asp-route-id="@Model.Id" class="card-link text-danger">Sil</a>
+            </div>
+        </div>
+     </div>
+</div>
+

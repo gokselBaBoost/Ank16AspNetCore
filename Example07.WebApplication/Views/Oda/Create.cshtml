@@ -1,0 +1,26 @@
+﻿<form asp-action="Create">
+    <h1>Oda</h1>
+    <input type="text" name="adi" class="form-control" /><br />
+    <input type="text" name="tarih" class="form-control" /><br />
+    <input type="text" name="bilgi" class="form-control" /><br />
+    <input type="submit" value="Gönder" />
+</form>
+
+<button onclick="OtelEkle()">Otel Ekle</button>
+
+<div id="OtelEkle">
+
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        function OtelEkle() {
+            $.ajax({
+                url: "/Otel/Create?isPartial=true",
+                success: (data) => {
+                    $("#OtelEkle").html(data);
+                }
+            });
+        }
+    </script>
+}

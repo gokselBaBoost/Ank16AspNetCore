@@ -1,3 +1,14 @@
 ﻿@{
+    List<FooterMenu> footerMenus = new List<FooterMenu>();
+
+    MenuService _menuService = new MenuService();
+
+    footerMenus.Add(new FooterMenu() { Title = "Menu 1", Link = "/Menu/Index/1" });
+    footerMenus.Add(new FooterMenu() { Title = "Menu 2", Link = "/Menu/Index/2" });
+    footerMenus.Add(new FooterMenu() { Title = "Menu 3", Link = "/Menu/Index/3" });
+
     Layout = "_AnaYapi"; //_Layout
+    ViewBag.Title = "LMS App v2.0 - ";
+    ViewBag.FooterMenus = footerMenus;
+    ViewBag.Menus = _menuService.GetMenus();
 }

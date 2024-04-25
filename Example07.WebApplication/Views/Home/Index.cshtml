@@ -1,0 +1,60 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div id="carouselExampleIndicators" class="carousel slide">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active c-item">
+            <img src="https://www.otelfiyat.com/media/temalar/5-yildizli-oteller.jpg" class="d-block w-100 c-img">
+        </div>
+        <div class="carousel-item c-item">
+            <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2a/46/c1/cf/rixos-downtown-antalya.jpg?w=1200&h=-1&s=1" class="d-block w-100 c-img">
+        </div>
+        <div class="carousel-item c-item">
+            <img src="https://fizibiliteturkiye.com/wp-content/uploads/bes-yildizli-otel-e1411050754219.jpg" class="d-block w-100 c-img">
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+
+@* <div class="row">
+    <div class="col">
+        @Html.Partial("_SubMenu")
+    </div>
+    <div class="col" id="subMenu">
+        @Html.RenderAction("SubMenu", "Home");
+    </div>
+</div> *@
+
+@* <div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div> *@
+
+
+@section Scripts{
+@*     <script type="text/javascript">
+        $(document).ready(() => {
+            $.ajax({
+                url: "/Home/SubMenu",
+                success: (data) => {
+                    //console.log(data);
+                    $("#subMenu").html(data);
+                }
+            });
+        });
+    </script> *@
+}

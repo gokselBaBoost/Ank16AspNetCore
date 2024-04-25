@@ -1,0 +1,41 @@
+﻿@model TeacherViewModel
+@{
+    var model = Model;
+}
+
+<div class="row">
+    <div class="col">
+        <form method="post">
+            <div class="mb-3 row">
+                <label asp-for="Name" class="col-sm-2 col-form-label">Adı</label>
+                <div class="col-sm-10">
+                    <input asp-for="Name" class="form-control">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label asp-for="Surname" class="col-sm-2 col-form-label">Soyadı</label>
+                <div class="col-sm-10">
+                    <input asp-for="Surname" class="form-control">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label asp-for="Email" class="col-sm-2 col-form-label">E-Posta</label>
+                <div class="col-sm-10">
+                    <input asp-for="Email" class="form-control" >
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label asp-for="BirthDate" class="col-sm-2 col-form-label">Doğum Tarihi</label>
+                <div class="col-sm-10">
+                    <input asp-for="BirthDate" class="form-control">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-10">
+                    <input type="submit" class="btn btn-success" value="Kaydet">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

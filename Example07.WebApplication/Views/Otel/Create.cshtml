@@ -1,0 +1,16 @@
+﻿@{
+    if (ViewBag.IsPartial)
+    {
+        Layout = "";
+    }
+}
+
+
+
+<form asp-action="Create">
+    <h1>Otel</h1>
+    <input type="text" name="adi" class="form-control" /><br />
+    <input type="text" name="tarih" class="form-control" /><br />
+    <input type="text" name="bilgi" class="form-control" /><br />
+    <input type="submit" value="Gönder" />
+</form>
