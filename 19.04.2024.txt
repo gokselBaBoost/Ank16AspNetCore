@@ -1,0 +1,50 @@
+﻿Görevler
+01. AspNet.Core Empty Projesi Açınız.
+02. Controller ve Views yapısını projeye entegre ediniz.
+03. Controller yapısına uygun varsayılan Rotayı dahil ediniz.
+04. Statik Dosyaları kullanmak için gerekli ayarı yapınız.
+05. Aşağıda ki Controllerları oluşturunuz.
+	- Home
+	- Student
+	- Teacher
+	- Lesson
+06. Home için Aşağıdaki Actionları ve viewlarını oluşturunuz.
+	- Index
+	- About
+	- Contact
+	- Help
+07. Student için Aşağıdaki Actionları ve viewlarını oluşturunuz.
+	- Index
+	- Add
+08. Teacher için Aşağıdaki Actionları ve viewlarını oluşturunuz.
+	- Index
+	- Add
+09. Lesson için Aşağıdaki Actionları ve viewlarını oluşturunuz.
+	- Index
+	- Add
+10. Tüm Controllerlar için Ortak menü tasarımı ve view yapısını
+	sisteme entegre ediniz. Boostrap ı projenize css ve js dosylarını
+	ekleyerek dahil ediniz.
+11. Menü için yapacağınız linkleri Tag Helper yardımı ile yapınız.
+12. Student Add view için aşağıda ki istenirleri alan bir 
+	form tasarlayınız. HtmlHelper ile oluşturunuz.
+	- Adı
+	- Soyadı
+	- Email
+	- Doğum Tarihi
+	- Cinsiyeti -> Enum
+	- Durumu -> Enum
+
+13. Student benzeri Teacher ve Lesson için de gerekli aşağıdaki ekranları oluşturalım
+	- Index -> bir tablo liste ve ekleme butonu, tablo da ise düzenleme, silme, detay linkleri
+	- Add -> için form tasarlayalım 
+
+14. Ekleme action post işlemi sonrasında Index sayfasına Redirect edilmesi (İpuçu : RedirectToAction()) ve bu action giderken bir başarılı durum için mesaj taşınmasının yapılması.
+	- Control Action To Control Action haberleşmesi için kullanaca??m?z bir veri ta??ma nesnemiz var
+	- Ekleme için ek olarak Controllerdan view bir mesaj ta??ma nesnesi kullanaca??z bundan iki tane yap?sal olarak bir birinden farkl? bu farklar? gözlemleyece?iz
+	- Her actionda ilgili action ?n view ?n da bir <h1> ba?l?k kullan?lmas? için bir yap? kurgulanmas?n? istiyorum.
+
+15. Tüm sayfalar için (Controller/Action) => Bir ba?l?k belirleyip bunu ana layout da bulunan ?ablon html dosyan?zda <title> taglar? aras?na yazd?rmas?n?z? istiyorum.
+	
+
+	
