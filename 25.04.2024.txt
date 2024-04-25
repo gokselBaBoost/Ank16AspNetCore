@@ -1,0 +1,25 @@
+Otel
+
+Ekle/Güncelle
+	- Adý
+	- Açýklama
+	- Türü
+	- Yýldýz Sayýsý
+	- Adres
+	- Ülke
+	- Þehir
+	- Telefon
+	- Email
+	- Logo
+
+Otel Liste
+	SýraNo| Adý | Türü | Yýldýz | Kapasite | Oda Sayýsý | Durumu | Ýþlemler
+	
+Ýþlemler
+	- Ek Bilgi
+	- Düzenle
+	- Kapasite Ekle
+	- Oda Ekle
+	- Fotoðraf Ekle
+	- Durum Deðiþtir
+	
