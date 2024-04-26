@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Text;
-using Mvc = System.Web.Mvc;
 
 namespace Practice01.WebApplication.Controllers
 {
@@ -17,6 +16,7 @@ namespace Practice01.WebApplication.Controllers
                 <p>Bu yazı hem türkçe hem de content css tarafından Kırımız renktedir.</p>
                 <button onclick=""TiklaBeni()"">Tıkla Beni</button>
                 <button onclick=""BenYeni()"">Ben Yeni</button>
+<img src=""/Home/Image"" />
                 <script type=""text/javascript"" src=""/Home/IndexJs""></script>
                 <script type=""text/javascript"" src=""/Home/JsResult""></script>
             </body>
@@ -43,9 +43,20 @@ namespace Practice01.WebApplication.Controllers
             return Content(jstext, "text/javascript", Encoding.UTF8);
         }
 
-        public Mvc.JavaScriptResult JsResult()
+        //public Mvc.JavaScriptResult JsResult()
+        //{
+        //    return new Mvc.JavaScriptResult() { Script = @"function BenYeni(){alert(""Ben Yeni"");}" };
+        //}
+
+        public FileResult Image()
         {
-            return new Mvc.JavaScriptResult() { Script = @"function BenYeni(){alert(""Ben Yeni"");}" };
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot//image//618-200x300.jpg");
+            //var contents = System.IO.File.ReadAllBytes(path);
+
+            //return $"data:image/jpeg;base64, {Convert.ToBase64String(contents)}";
+
+            var image = System.IO.File.OpenRead(path);
+            return File(image, "image/jpeg");
         }
     }
 }
