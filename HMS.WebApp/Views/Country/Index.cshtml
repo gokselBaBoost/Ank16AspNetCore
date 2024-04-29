@@ -1,0 +1,40 @@
+﻿@model List<CountryEditListViewModel>
+@{
+    int rowId = 0;
+}
+<div>
+    <a class="btn btn-success" asp-controller="Country" asp-action="New" >Yeni</a>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Adı</th>
+            <th>Durumu</th>
+            <th>İşlem</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (CountryEditListViewModel item in Model)
+        {
+            <tr>
+                <td>@(++rowId)</td>
+                <td>@item.Name</td>
+                <td>@item.IsActive</td>
+                <td>
+                    <a class="btn btn-info" asp-controller="Country" asp-action="Edit" asp-route-id="@item.Id">Düzenle</a>
+                    <a class="btn btn-secondary" asp-controller="Country" asp-action="Detail" asp-route-id="@item.Id">Detay</a>
+                    <a class="btn btn-danger" asp-controller="Country" asp-action="Delete" asp-route-id="@item.Id">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <th>#</th>
+            <th>Adı</th>
+            <th>Durumu</th>
+            <th>İşlem</th>
+        </tr>
+    </tfoot>
+</table>

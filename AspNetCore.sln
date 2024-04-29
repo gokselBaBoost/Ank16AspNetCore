@@ -15,7 +15,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Uygulamalar", "Uygulamalar"
 	ProjectSection(SolutionItems) = preProject
 		17.04.2024.txt = 17.04.2024.txt
 		18.04.2024.txt = 18.04.2024.txt
-		19.04.2024.txt = 19.04.2024.txt
 		25.04.2024.txt = 25.04.2024.txt
 	EndProjectSection
 EndProject
@@ -30,6 +29,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example07.WebApplication", "Example07.WebApplication\Example07.WebApplication.csproj", "{2972B2C0-D3D4-4703-8204-675120FB1180}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example08.WebApplication", "Example08.WebApplication\Example08.WebApplication.csproj", "{B2234850-A2E8-4B86-A24B-131C1DE1F183}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HMS.WebApp", "HMS.WebApp\HMS.WebApp.csproj", "{DE7EEA34-103E-4972-8D32-8E28A762BB67}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,6 +78,10 @@ Global
 		{B2234850-A2E8-4B86-A24B-131C1DE1F183}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2234850-A2E8-4B86-A24B-131C1DE1F183}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2234850-A2E8-4B86-A24B-131C1DE1F183}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE7EEA34-103E-4972-8D32-8E28A762BB67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE7EEA34-103E-4972-8D32-8E28A762BB67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE7EEA34-103E-4972-8D32-8E28A762BB67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE7EEA34-103E-4972-8D32-8E28A762BB67}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

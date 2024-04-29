@@ -1,0 +1,1 @@
+﻿Merhaba beni bir XmlHttpRequest nesnesi çağırdı.

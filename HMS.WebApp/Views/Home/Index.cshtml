@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+    <div id="content"></div>
+    <input type="text" id="deger" />
+    <button onclick="GetHelloWorld()">Hello World</button>
+    <button onclick="Karesi()">Sayının Karesi</button>
+    <hr />
+    <input type="text" id="username" />
+    <input type="password" id="password" />
+    <button onclick="Login()">Login</button>
+    <hr />
+    <select onchange="Color(this, this.value)">
+        <option value="red">Kırmızı</option>
+        <option value="yellow">Sarı</option>
+        <option value="blue">Mavi</option>
+        <option value="black">Siyah</option>
+        <option value="gray">Gri</option>
+    </select>
+    <div style="width:200px;height:20px;border:1px solid black" id="ColorContent"></div>
+    <hr />
+    <select asp-items="ViewBag.Cars" onchange="GetModel(this.value)"></select>
+    <div id="CarModels"></div>
+</div>
+@section Scripts{
+    <script type="text/javascript" src="~/js/index.js">
+        // $("#content").html("test");
+        // alert("test");
+    </script>
+}
