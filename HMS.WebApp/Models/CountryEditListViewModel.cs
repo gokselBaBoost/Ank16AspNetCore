@@ -3,5 +3,7 @@
     public class CountryEditListViewModel : CountryAddViewModel
     {
         public int Id { get; set; }
+
+        public int RowNum { get; set; }
     }
 }

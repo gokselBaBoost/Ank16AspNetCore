@@ -1,0 +1,12 @@
+﻿@model CountryAddViewModel
+
+<h1>Add Country</h1>
+
+<form>
+    <input asp-for="Name" class="form-control" placeholder="@Html.DisplayNameFor(m => m.Name)" /> <br />
+
+    <label asp-for="IsActive">@Html.DisplayNameFor(m => m.IsActive)</label>
+    <input asp-for="IsActive" class="form-check" /><br />
+
+    <input type="button" class="btn btn-success" value="Kaydet" onclick="SaveCountry()" />
+</form>
