@@ -1,4 +1,5 @@
 using HMS.WebApp.Models;
+using HMS.WebApp.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Diagnostics;
@@ -8,14 +9,18 @@ namespace HMS.WebApp.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IMailService _mailService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IMailService mailService)
         {
             _logger = logger;
+            _mailService = mailService;
         }
 
         public IActionResult Index()
         {
+            _mailService.Send("goksel@mail.com", "Services Örneði", "Bu mesaj mail servisi ile gönderildi.--->");
+
             List<SelectListItem> cars = new List<SelectListItem>();
             cars.Add(new SelectListItem() { Text = "Mercedes", Value = "1" });
             cars.Add(new SelectListItem() { Text = "BMW", Value = "2" });
