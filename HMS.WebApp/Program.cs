@@ -1,5 +1,7 @@
-using HMS.BLL.Managers;
+﻿using HMS.BLL.Managers.Concrete;
 using HMS.DAL.Context;
+using HMS.DAL.Repositories.Concrete;
+using HMS.DAL.Services.Concrete;
 using HMS.WebApp.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,12 +12,26 @@ Console.WriteLine(builder.Configuration.GetConnectionString("HmsDbConStr"));
 // Add services to the container.
 builder.Services.AddDbContext<HmsDbContext>(opts =>
 {
-    opts.UseSqlServer(builder.Configuration.GetConnectionString("HmsDbConStr"));
+    opts.UseLazyLoadingProxies()
+        .UseSqlServer(builder.Configuration.GetConnectionString("HmsDbConStr"));
 });
 
+
+// Country Implimentation
+builder.Services.AddSingleton<CountryRepo>();
+builder.Services.AddSingleton<CountryService>();
 builder.Services.AddSingleton<CountryManager>();
 
-builder.Services.AddScoped<IMailService,HotmailService>();
+// City Implimentation
+builder.Services.AddSingleton<CityRepo>();
+builder.Services.AddSingleton<CityService>();
+builder.Services.AddSingleton<CityManager>();
+
+
+
+builder.Services.AddSingleton<IMailService, GmailService>();    // Her zaman her istek tek örnek
+//builder.Services.AddScoped<IMailService, GmailService>();     // İstek başına tek örnek
+//builder.Services.AddTransient<IMailService, GmailService>();  // İstek başına ve istenmesi ayrı örnek
 
 builder.Services.AddControllersWithViews();
 

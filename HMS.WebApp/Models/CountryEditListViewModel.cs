@@ -5,5 +5,7 @@
         public int Id { get; set; }
 
         public int RowNum { get; set; }
+
+        public ICollection<CityEditListViewModel> Cities { get; set; }
     }
 }

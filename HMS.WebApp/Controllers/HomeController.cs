@@ -19,7 +19,11 @@ namespace HMS.WebApp.Controllers
 
         public IActionResult Index()
         {
-            _mailService.Send("goksel@mail.com", "Services Örneði", "Bu mesaj mail servisi ile gönderildi.--->");
+            _logger.LogInformation($" mailService Instance - Index : { _mailService.GetHashCode().ToString()}");
+
+            //GetOtherAction();
+
+            _mailService.Send("goksel@mail.com", "Services Örnegi", "Bu mesaj mail servisi ile gönderildi.--->");
 
             List<SelectListItem> cars = new List<SelectListItem>();
             cars.Add(new SelectListItem() { Text = "Mercedes", Value = "1" });
@@ -29,6 +33,40 @@ namespace HMS.WebApp.Controllers
             ViewBag.Cars = cars;
 
             return View();
+        }
+
+        //private void GetOtherAction()
+        //{
+        //    _logger.LogInformation($" mailService Instance - GetOtherAction : {mailService.GetHashCode().ToString()}");
+        //}
+
+        public IActionResult Index2([FromServices] IMailService mailService)
+        {
+            _logger.LogInformation($" _mailService Instance  - Index 2 : {_mailService.GetHashCode().ToString()}");
+            _logger.LogInformation($" mailService Instance  - Index 2 : {mailService.GetHashCode().ToString()}");
+
+            List<SelectListItem> cars = new List<SelectListItem>();
+            cars.Add(new SelectListItem() { Text = "Mercedes", Value = "1" });
+            cars.Add(new SelectListItem() { Text = "BMW", Value = "2" });
+            cars.Add(new SelectListItem() { Text = "Volvo", Value = "3" });
+
+            ViewBag.Cars = cars;
+
+            return View("Index");
+        }
+
+        public IActionResult Index3()
+        {
+            _logger.LogInformation($" mailService Instance  - Index 3 : {_mailService.GetHashCode().ToString()}");
+
+            List<SelectListItem> cars = new List<SelectListItem>();
+            cars.Add(new SelectListItem() { Text = "Mercedes", Value = "1" });
+            cars.Add(new SelectListItem() { Text = "BMW", Value = "2" });
+            cars.Add(new SelectListItem() { Text = "Volvo", Value = "3" });
+
+            ViewBag.Cars = cars;
+
+            return View("Index");
         }
 
         public IActionResult CarModels(int id)

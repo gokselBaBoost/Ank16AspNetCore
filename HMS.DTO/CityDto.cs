@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace HMS.DTO
 {
-    public class CountryDto : BaseDto
+    public class CityDto : BaseDto
     {
         public string Name { get; set; }
+        public CountryDto Country { get; set; }
+        public int CountryId { get; set; }
         public bool IsActive { get; set; }
-        public ICollection<CityDto> Cities { get; set; }
+
     }
 }

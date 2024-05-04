@@ -10,7 +10,7 @@ namespace HMS.DAL.Repositories.Abstract
 {
     public abstract class Repo<TEntity> : IRepo<TEntity> where TEntity : BaseEntity
     {
-        private HmsDbContext _dbContext;
+        protected HmsDbContext _dbContext;
         protected Repo(HmsDbContext dbContext)
         {
 

@@ -1,4 +1,4 @@
-﻿using HMS.BLL.Managers;
+﻿using HMS.BLL.Managers.Concrete;
 using HMS.DAL.Context;
 using HMS.DTO;
 using HMS.WebApp.Models;
@@ -136,6 +136,11 @@ namespace HMS.WebApp.Controllers
         public IActionResult Add(CountryAddViewModel viewModel)
         {
             //Validation 
+
+            if(!ModelState.IsValid)
+            {
+                return View(viewModel);
+            }
 
             //Managera gönderim
             

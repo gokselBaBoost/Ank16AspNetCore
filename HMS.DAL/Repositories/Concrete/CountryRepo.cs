@@ -9,11 +9,16 @@ using System.Threading.Tasks;
 
 namespace HMS.DAL.Repositories.Concrete
 {
-    internal class CountryRepo : Repo<Country>
+    public class CountryRepo : Repo<Country>, ICountryRepo
     {
         public CountryRepo(HmsDbContext dbContext) : base(dbContext)
         { }
 
         //Özelleştirilen metotlar burada olacaktır.
+
+        public IEnumerable<Country> GetActiveList()
+        {
+            return base._dbContext.Countries.Where(c => c.IsActive).ToList();
+        }
     }
 }

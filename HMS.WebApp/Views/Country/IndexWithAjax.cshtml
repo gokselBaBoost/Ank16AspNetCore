@@ -1,0 +1,74 @@
+﻿@model List<CountryEditListViewModel>
+@{
+    //int rowId = 0;
+
+    // List<CountryEditListViewModel> countryEditListViewModels = (List<CountryEditListViewModel>)ViewBag.Model;
+    // List<CountryEditListViewModel> countryEditListViewModels2 = (List<CountryEditListViewModel>)ViewData["Model"];
+
+}
+
+<div class="row">
+    <div class="alert alert-success alert-dismissible" role="alert" id="success-message">
+
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <div class="col-3 px-2 py-2" id="add-country">
+    </div>
+    <div class="col-9">
+        <div class="row">
+            <div class="col">
+                <a class="btn btn-success" asp-controller="Country" asp-action="Add">Yeni</a>
+                <a class="btn btn-warning" onclick="AddCountry()">Yeni Ekle Ajax</a>
+                <a class="btn btn-primary" onclick="GetCountries()">Yenile</a>
+                <hr />
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Adı</th>
+                            <th>Durumu</th>
+                            <th>İşlem</th>
+                        </tr>
+                    </thead>
+                    <tbody id="country-list">
+                        @foreach (CountryEditListViewModel item in Model)
+                        {
+                            <tr>
+                                <td>@item.RowNum</td>
+                                <td>@item.Name</td>
+                                <td>@item.IsActive</td>
+                                <td>
+                                    <a class="btn btn-info" asp-controller="Country" asp-action="Edit" asp-route-id="@item.Id">Düzenle</a>
+                                    <a class="btn btn-secondary" asp-controller="Country" asp-action="Detail" asp-route-id="@item.Id">Detay</a>
+                                    <a class="btn btn-danger" asp-controller="Country" asp-action="Delete" asp-route-id="@item.Id">Sil</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4">
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination justify-content-center">
+                                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+
+                                        @for (int i = 1; i <= ViewBag.PageCount; i++)
+                                        {
+                                            <li class="page-item"><a class="page-link" onclick="GetCountries(@i)">@i</a></li>
+                                        }
+
+                                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                    </ul>
+                                </nav>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript" src="~/js/country/index.js"></script>
+}
