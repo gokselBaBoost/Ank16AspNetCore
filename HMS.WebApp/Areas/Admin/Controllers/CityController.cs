@@ -5,7 +5,7 @@ using HMS.WebApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace HMS.WebApp.Controllers
+namespace HMS.WebApp.Areas.Admin.Controllers
 {
     public class CityController : Controller
     {
@@ -17,7 +17,7 @@ namespace HMS.WebApp.Controllers
 
         private IEnumerable<CityDto> _citylist;
         private IEnumerable<CityDto> _cityPagelist;
-        
+
 
         public CityController(CityManager cityManager, CountryManager countryManager)
         {
@@ -25,7 +25,7 @@ namespace HMS.WebApp.Controllers
             _countryManager = countryManager;
 
             _citylist = _cityManager.GetAll();
-            _cityPagelist =  _citylist.Skip((_pageNo - 1) * _pageSize).Take(_pageSize).ToList();
+            _cityPagelist = _citylist.Skip((_pageNo - 1) * _pageSize).Take(_pageSize).ToList();
         }
 
         public IActionResult Index()
@@ -36,12 +36,12 @@ namespace HMS.WebApp.Controllers
             foreach (CityDto city in _cityPagelist)
             {
                 CountryEditListViewModel country = new CountryEditListViewModel();
-                if(city.Country is not null)
+                if (city.Country is not null)
                 {
                     country.Id = city.Country.Id;
                     country.Name = city.Country.Name;
                 }
-                
+
 
 
                 CityEditListViewModel vm = new CityEditListViewModel();
@@ -87,7 +87,7 @@ namespace HMS.WebApp.Controllers
 
             return PartialView("_CityList", list);
         }
-    
+
         public IActionResult Add()
         {
             CityAddViewModel vm = new CityAddViewModel();
@@ -113,7 +113,7 @@ namespace HMS.WebApp.Controllers
         public IActionResult Add(CityAddViewModel vm)
         {
             //Validation Check
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return View(vm);
             }

@@ -1,0 +1,39 @@
+﻿@model CountryAddViewModel
+
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-header">
+                <h1>Add Country</h1>
+            </div>
+            <div class="card-body">
+                <form asp-action="Add">
+                    <div asp-validation-summary="ModelOnly"></div>
+                    <div class="row mb-3">
+                        <label asp-for="Name" class="col-sm-2 col-form-label">@Html.DisplayNameFor(m => m.Name)</label>
+                        <div class="col-sm-10">
+                            <input asp-for="Name" class="form-control" placeholder="@Html.DisplayNameFor(m => m.Name)" />
+                            <span asp-validation-for="Name" class="form-text text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label asp-for="IsActive" class="col-sm-2 col-form-label">@Html.DisplayNameFor(m => m.IsActive)</label>
+                        <div class="col-sm-10">
+                            <div class="form-check form-switch">
+                                <input asp-for="IsActive" class="form-check-input" role="switch" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-10">
+                            <input type="submit" class="btn btn-success" value="Kaydet" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

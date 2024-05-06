@@ -1,0 +1,22 @@
+﻿@model List<CountryEditListViewModel>
+@{
+    int rowId = 0;
+
+    // List<CountryEditListViewModel> countryEditListViewModels = (List<CountryEditListViewModel>)ViewBag.Model;
+    // List<CountryEditListViewModel> countryEditListViewModels2 = (List<CountryEditListViewModel>)ViewData["Model"];
+
+}
+
+@foreach (CountryEditListViewModel item in Model)
+{
+    <tr>
+        <td>@item.RowNum</td>
+        <td>@item.Name</td>
+        <td>@item.IsActive</td>
+        <td>
+            <a class="btn btn-info" asp-controller="Country" asp-action="Edit" asp-route-id="@item.Id">Düzenle</a>
+            <a class="btn btn-secondary" asp-controller="Country" asp-action="Detail" asp-route-id="@item.Id">Detay</a>
+            <a class="btn btn-danger" asp-controller="Country" asp-action="Delete" asp-route-id="@item.Id">Sil</a>
+        </td>
+    </tr>
+}

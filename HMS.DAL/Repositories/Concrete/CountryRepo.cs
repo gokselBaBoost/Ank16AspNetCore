@@ -21,5 +21,11 @@ namespace HMS.DAL.Repositories.Concrete
         {
             return base._dbContext.Countries.Where(c => c.IsActive).ToList();
         }
+
+        public override Country? Get(int id)
+        {
+            return base._dbContext.Countries.Include(c => c.Cities).SingleOrDefault(c => c.Id == id);
+        }
+
     }
 }

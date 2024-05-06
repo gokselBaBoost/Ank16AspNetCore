@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
 using HMS.BLL.Managers.Concrete;
-using HMS.DAL.Context;
 using HMS.DTO;
 using HMS.WebApp.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace HMS.WebApp.Controllers
+namespace HMS.WebApp.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class CountryController : Controller
     {
         private CountryManager _countryManager;
@@ -122,7 +122,7 @@ namespace HMS.WebApp.Controllers
 
         //    return Json(response);
         //}
-    
+
         //public List<Country> GetCountries(int pageSize = 0, int pageNo = 0)
         //{
         //    pageSize = pageSize == 0 ? _pageSize : pageSize;
@@ -151,19 +151,19 @@ namespace HMS.WebApp.Controllers
         {
             //Validation 
 
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return View(viewModel);
             }
 
             //Managera gönderim
-            
+
 
             CountryDto countryDto = new CountryDto();
             countryDto.Name = viewModel.Name;
             countryDto.IsActive = viewModel.IsActive;
 
-            if(_countryManager.Add(countryDto) > 0)
+            if (_countryManager.Add(countryDto) > 0)
             {
                 return RedirectToAction(nameof(Index));
             }
@@ -171,7 +171,7 @@ namespace HMS.WebApp.Controllers
             return View(viewModel);
 
         }
-    
+
         public IActionResult Detail(int id)
         {
             CountryDto countryDto = _countryManager.Get(id);
@@ -185,6 +185,6 @@ namespace HMS.WebApp.Controllers
 
             return View(vm);
         }
-    
+
     }
 }

@@ -14,5 +14,10 @@ namespace HMS.DAL.Repositories.Concrete
     {
         public CityRepo(HmsDbContext dbContext) : base(dbContext)
         {}
+
+        public override IEnumerable<City> GetAll()
+        {
+            return _dbContext.Cities.Include(c => c.Country).ToList();
+        }
     }
 }

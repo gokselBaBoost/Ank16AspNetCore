@@ -1,0 +1,52 @@
+﻿@model CountryEditListViewModel
+
+<div class="card">
+    <div class="card-header">
+        Ülke Detay Sayfası
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">@Model.Name</h5>
+        <p class="card-text">Ülke ile ilgili açıklama gelebilir</p>
+        
+        <div class="list-group">
+
+            @foreach(CityEditListViewModel city in Model.Cities)
+            {
+                <a asp-controller="City" asp-action="Detail" asp-route-id="@city.Id" class="list-group-item list-group-item-action">
+                    @city.Name
+                </a>
+            }
+
+        </div>
+
+        <div class="accordion" id="accordion-cities">
+            @foreach (CityEditListViewModel city in Model.Cities)
+            {
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" 
+                                data-bs-toggle="collapse" 
+                                data-bs-target="#collapse-city-Id-@city.Id"
+                                data-ajax-url="@Url.Action("GetByCity", "Hotel", new { Id = city.Id })"
+                                aria-expanded="true" 
+                                aria-controls="collapse-city-Id-@city.Id"
+                                onclick="GetHotelsForCity(@city.Id, this)"
+                        >
+                            @city.Name
+                        </button>
+                    </h2>
+                    <div id="collapse-city-Id-@city.Id" class="accordion-collapse collapse" data-bs-parent="#accordion-cities">
+                        <div class="accordion-body" id="accordion-body-@city.Id">
+                            Bu kısım AJAX ile Hotel Controller dan GetByCity ile o şehire ait otellerin getirilmesi sağlanır
+                        </div>
+                    </div>
+                </div>                
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript" src="~/js/city/detail.js">    
+    </script>
+}

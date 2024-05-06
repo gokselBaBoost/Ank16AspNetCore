@@ -31,7 +31,7 @@ namespace HMS.DAL.Repositories.Abstract
             return _dbContext.SaveChanges();
         }
 
-        public TEntity? Get(int id)
+        public virtual TEntity? Get(int id)
         {
             return _dbContext.Set<TEntity>().Find(id);
         }

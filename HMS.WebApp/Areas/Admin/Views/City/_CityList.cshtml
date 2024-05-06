@@ -1,0 +1,17 @@
+﻿@model List<CityEditListViewModel>
+
+
+@foreach (CityEditListViewModel item in Model)
+{
+    <tr>
+        <td>@item.RowNum</td>
+        <td>@item.Name</td>
+        <td>@item.Country.Name</td>
+        <td>@item.IsActive</td>
+        <td>
+            <a class="btn btn-info" asp-controller="City" asp-action="Edit" asp-route-id="@item.Id">Düzenle</a>
+            <a class="btn btn-secondary" asp-controller="City" asp-action="Detail" asp-route-id="@item.Id">Detay</a>
+            <a class="btn btn-danger" asp-controller="City" asp-action="Delete" asp-route-id="@item.Id">Sil</a>
+        </td>
+    </tr>
+}

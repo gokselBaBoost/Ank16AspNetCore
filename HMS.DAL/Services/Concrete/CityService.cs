@@ -19,7 +19,7 @@ namespace HMS.DAL.Services.Concrete
         {
             MapperConfiguration config = new MapperConfiguration(config =>
             {
-                Profile profile = new CountryProfile();
+                Profile profile = new CityProfile();
                 config.AddProfile(profile);
             });
 
