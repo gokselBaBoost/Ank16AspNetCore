@@ -13,6 +13,7 @@ namespace HMS.DAL.Repositories.Abstract
         int Update(TEntity entity);
         int Delete(TEntity entity);
         IEnumerable<TEntity> GetAll();
+        //List<TEntity> GetAll();
         TEntity? Get(int id);
     }
 }

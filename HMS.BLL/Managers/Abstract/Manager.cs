@@ -1,4 +1,5 @@
-﻿using HMS.DAL.Services.Abstract;
+﻿using AutoMapper;
+using HMS.DAL.Services.Abstract;
 using HMS.DAL.Services.Concrete;
 using HMS.DTO;
 using HMS.Entities;
@@ -15,6 +16,11 @@ namespace HMS.BLL.Managers.Abstract
         where TEntity : BaseEntity
     {
         protected Service<TEntity, TDto> _service;
+
+        protected Manager(Service<TEntity, TDto> service)
+        {
+            _service = service;
+        }
 
         public int Add(TDto dto)
         {
@@ -33,7 +39,7 @@ namespace HMS.BLL.Managers.Abstract
 
         public IEnumerable<TDto> GetAll()
         {
-            return _service.GetAll();
+            return _service.GetAll().ToList();
         }
 
         public int Update(TDto dto)

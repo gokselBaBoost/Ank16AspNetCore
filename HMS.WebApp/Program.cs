@@ -2,6 +2,7 @@
 using HMS.DAL.Context;
 using HMS.DAL.Repositories.Concrete;
 using HMS.DAL.Services.Concrete;
+using HMS.DAL.Services.Profiles;
 using HMS.WebApp.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,8 +13,7 @@ Console.WriteLine(builder.Configuration.GetConnectionString("HmsDbConStr"));
 // Add services to the container.
 builder.Services.AddDbContext<HmsDbContext>(opts =>
 {
-    opts.UseLazyLoadingProxies()
-        .UseSqlServer(builder.Configuration.GetConnectionString("HmsDbConStr"));
+    opts.UseLazyLoadingProxies().UseSqlServer(builder.Configuration.GetConnectionString("HmsDbConStr"));
 });
 
 

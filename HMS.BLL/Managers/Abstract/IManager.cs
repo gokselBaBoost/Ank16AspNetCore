@@ -12,7 +12,6 @@ namespace HMS.BLL.Managers.Abstract
         int Add(TDto dto);
         int Update(TDto dto);
         int Delete(TDto dto);
-
         IEnumerable<TDto> GetAll();
         TDto? Get(int id);
     }

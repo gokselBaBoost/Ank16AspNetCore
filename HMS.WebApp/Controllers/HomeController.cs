@@ -35,6 +35,12 @@ namespace HMS.WebApp.Controllers
             return View();
         }
 
+        [ResponseCache(Duration = 10, VaryByHeader = "Time-To-Local")]
+        public string CacheTime()
+        {
+            return DateTime.Now.ToString();
+        }
+
         //private void GetOtherAction()
         //{
         //    _logger.LogInformation($" mailService Instance - GetOtherAction : {mailService.GetHashCode().ToString()}");

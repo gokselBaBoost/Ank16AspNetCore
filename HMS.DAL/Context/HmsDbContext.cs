@@ -11,7 +11,9 @@ namespace HMS.DAL.Context
     public class HmsDbContext : DbContext
     {
         public HmsDbContext(DbContextOptions dbContextOptions) : base(dbContextOptions)
-        { }
+        {
+            
+        }
 
         public DbSet<Country> Countries { get; set; }
         public DbSet<City> Cities { get; set; }

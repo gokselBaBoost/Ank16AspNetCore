@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using AutoMapper.EquivalencyExpression;
 using AutoMapper.Execution;
 using AutoMapper.Extensions.ExpressionMapping;
 using HMS.DAL.Repositories.Abstract;
@@ -16,26 +17,28 @@ namespace HMS.DAL.Services.Abstract
     public abstract class Service<TEntity, TDto> : IService<TDto> 
         where TEntity : BaseEntity
         where TDto : BaseDto
+
     {
-        protected readonly IMapper _mapper;
+        protected IMapper _mapper;
         public Repo<TEntity> _repo;
-        protected Profile _profile = null;
 
         public Service(Repo<TEntity> repo)
         {
-            MapperConfiguration config = new MapperConfiguration(cfg =>
-            {
-                cfg.AddExpressionMapping()
-                   .CreateMap<TDto, TEntity>()
-                   .ReverseMap();
 
-                if (_profile != null)
-                    cfg.AddProfile(_profile);
+            MapperConfiguration _config = new MapperConfiguration(cfg =>
+            {
+                cfg.AddExpressionMapping().AddCollectionMappers();
+                cfg.CreateMap<TDto, TEntity>().ReverseMap();
             });
 
-            _mapper = config.CreateMapper();
+            _mapper = _config.CreateMapper();
             
             _repo = repo;
+        }
+
+        public IMapper Mapper 
+        { 
+            set { _mapper = value; } 
         }
 
         public int Add(TDto dto)
@@ -63,7 +66,7 @@ namespace HMS.DAL.Services.Abstract
         {
             IEnumerable<TEntity> entities = _repo.GetAll();
 
-            IEnumerable<TDto> dtos = _mapper.Map<IEnumerable<TDto>>(entities);
+            IEnumerable<TDto> dtos = _mapper.Map<IEnumerable<TDto>>(entities.ToList());
 
             return dtos;
         }

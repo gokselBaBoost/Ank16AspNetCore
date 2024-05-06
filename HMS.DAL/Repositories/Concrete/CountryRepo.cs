@@ -1,6 +1,7 @@
 ﻿using HMS.DAL.Context;
 using HMS.DAL.Repositories.Abstract;
 using HMS.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace HMS.DAL.Repositories.Concrete
     public class CountryRepo : Repo<Country>, ICountryRepo
     {
         public CountryRepo(HmsDbContext dbContext) : base(dbContext)
-        { }
+        {}
 
         //Özelleştirilen metotlar burada olacaktır.
 

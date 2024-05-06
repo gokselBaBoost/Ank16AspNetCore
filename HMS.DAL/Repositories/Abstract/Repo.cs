@@ -1,5 +1,6 @@
 ﻿using HMS.DAL.Context;
 using HMS.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +14,7 @@ namespace HMS.DAL.Repositories.Abstract
         protected HmsDbContext _dbContext;
         protected Repo(HmsDbContext dbContext)
         {
-
             _dbContext = dbContext;
-
         }
 
         public int Add(TEntity entity)
@@ -37,7 +36,7 @@ namespace HMS.DAL.Repositories.Abstract
             return _dbContext.Set<TEntity>().Find(id);
         }
 
-        public IEnumerable<TEntity> GetAll()
+        public virtual IEnumerable<TEntity> GetAll()
         {
             return _dbContext.Set<TEntity>().ToList();
         }

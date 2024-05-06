@@ -10,6 +10,6 @@ namespace HMS.DTO
     {
         public string Name { get; set; }
         public bool IsActive { get; set; }
-        public ICollection<CityDto> Cities { get; set; }
+        public IEnumerable<CityDto> Cities { get; set; }
     }
 }
