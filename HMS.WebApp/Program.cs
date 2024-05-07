@@ -4,12 +4,20 @@ using HMS.DAL.Repositories.Concrete;
 using HMS.DAL.Services.Concrete;
 using HMS.DAL.Services.Profiles;
 using HMS.WebApp.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 Console.WriteLine(builder.Configuration.GetConnectionString("HmsDbConStr"));
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(opt =>
+                {
+                    opt.LoginPath = "/Admin/Account/Login";     // Account/Login
+                    opt.LogoutPath = "/Admin/Account/Logout";   // Account/Logout
+                });
 
 // Add services to the container.
 builder.Services.AddDbContext<HmsDbContext>(opts =>
@@ -28,7 +36,6 @@ builder.Services.AddSingleton<CountryManager>();
 builder.Services.AddSingleton<CityRepo>();
 builder.Services.AddSingleton<CityService>();
 builder.Services.AddSingleton<CityManager>();
-
 
 
 builder.Services.AddSingleton<IMailService, GmailService>();    // Her zaman her istek tek örnek
@@ -71,6 +78,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

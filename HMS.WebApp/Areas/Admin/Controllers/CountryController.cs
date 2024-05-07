@@ -2,6 +2,7 @@
 using HMS.BLL.Managers.Concrete;
 using HMS.DTO;
 using HMS.WebApp.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HMS.WebApp.Areas.Admin.Controllers
@@ -31,6 +32,7 @@ namespace HMS.WebApp.Areas.Admin.Controllers
             _mapper = config.CreateMapper();
         }
 
+        [Authorize]
         public IActionResult Index()
         {
             //List<Country> countries = GetCountries(); //_hmsDbContext.Countries.ToList();

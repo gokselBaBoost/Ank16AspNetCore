@@ -19,18 +19,18 @@ namespace HMS.WebApp.Controllers
 
         public IActionResult Index()
         {
-            _logger.LogInformation($" mailService Instance - Index : { _mailService.GetHashCode().ToString()}");
+            //_logger.LogInformation($" mailService Instance - Index : { _mailService.GetHashCode().ToString()}");
 
-            //GetOtherAction();
+            ////GetOtherAction();
 
-            _mailService.Send("goksel@mail.com", "Services Örnegi", "Bu mesaj mail servisi ile gönderildi.--->");
+            //_mailService.Send("goksel@mail.com", "Services Örnegi", "Bu mesaj mail servisi ile gönderildi.--->");
 
-            List<SelectListItem> cars = new List<SelectListItem>();
-            cars.Add(new SelectListItem() { Text = "Mercedes", Value = "1" });
-            cars.Add(new SelectListItem() { Text = "BMW", Value = "2" });
-            cars.Add(new SelectListItem() { Text = "Volvo", Value = "3" });
+            //List<SelectListItem> cars = new List<SelectListItem>();
+            //cars.Add(new SelectListItem() { Text = "Mercedes", Value = "1" });
+            //cars.Add(new SelectListItem() { Text = "BMW", Value = "2" });
+            //cars.Add(new SelectListItem() { Text = "Volvo", Value = "3" });
 
-            ViewBag.Cars = cars;
+            //ViewBag.Cars = cars;
 
             return View();
         }
