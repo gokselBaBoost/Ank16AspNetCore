@@ -10,6 +10,9 @@ namespace HMS.DTO
     {
         public string Name { get; set; }
         public bool IsActive { get; set; }
+        public int AccountUserId { get; set; }
+        public AccountUserDto AccountUser { get; set; }
+
         public IEnumerable<CityDto> Cities { get; set; }
     }
 }

@@ -18,5 +18,7 @@ namespace HMS.DAL.Context
         public DbSet<Country> Countries { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<Hotel> Hotels { get; set; }
+        public DbSet<Menu> Menus { get; set; }
+        public DbSet<AccountUser> AccountUsers { get; set; }
     }
 }

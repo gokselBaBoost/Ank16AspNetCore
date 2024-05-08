@@ -14,10 +14,16 @@ namespace HMS.DAL.Services.Profiles
         public CityProfile()
         {
             CreateMap<CityDto, City>().ForMember(dest => dest.Country, opt => opt.MapFrom(src => src.Country));
+            CreateMap<CityDto, City>().ForMember(dest => dest.AccountUser, opt => opt.MapFrom(src => src.AccountUser));
+
+
             CreateMap<City, CityDto>().ForMember(dest => dest.Country, opt => opt.MapFrom(src => src.Country));
+            CreateMap<City, CityDto>().ForMember(dest => dest.AccountUser, opt => opt.MapFrom(src => src.AccountUser));
 
             CreateMap<CountryDto, Country>().ForMember(dest => dest.Cities, opt => opt.MapFrom(src => src.Cities));
             CreateMap<Country, CountryDto>().ForMember(dest => dest.Cities, opt => opt.MapFrom(src => src.Cities));
+
+            CreateMap<AccountUserDto, AccountUser>().ReverseMap();
         }
     }
 }

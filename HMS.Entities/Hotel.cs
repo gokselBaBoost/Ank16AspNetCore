@@ -8,5 +8,8 @@
         public int CountryId { get; set; }
         public virtual City City { get; set; }
         public int CityId { get; set; }
+
+        public int? AccountUserId { get; set; }
+        public AccountUser? AccountUser { get; set; }
     }
 }

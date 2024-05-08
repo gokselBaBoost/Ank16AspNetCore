@@ -2,11 +2,14 @@
 using HMS.BLL.Managers.Concrete;
 using HMS.DTO;
 using HMS.WebApp.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace HMS.WebApp.Areas.Admin.Controllers
 {
+    [Area("Admin")]
+    [Authorize]
     public class CityController : Controller
     {
         private readonly CityManager _cityManager;

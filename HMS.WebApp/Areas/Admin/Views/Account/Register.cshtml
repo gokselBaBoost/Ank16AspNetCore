@@ -1,0 +1,73 @@
+﻿@model RegisterViewModel
+@{
+    Layout = "_LayoutAccountForm";
+    ViewBag.LoginBoxMsg = "Register a new membership";
+    ViewBag.LoginLink = true;
+    ViewBag.ForgotPasswordLink = false;
+    ViewBag.RegisterLink = false;
+}
+
+<form asp-controller="Account" asp-action="Register" method="post">
+    <div asp-validation-summary="ModelOnly"></div>
+    <div class="input-group mb-3">
+        <input asp-for="Name" class="form-control" placeholder="@Html.DisplayNameFor(m => m.Name)">
+        <div class="input-group-append">
+            <div class="input-group-text">
+                <span class="fas fa-user"></span>
+            </div>
+        </div>
+        <span asp-validation-for="Name" class="d-block text-danger"></span>
+    </div>
+    <div class="input-group mb-3">
+        <input asp-for="Surname" class="form-control" placeholder="@Html.DisplayNameFor(m => m.Surname)">
+        <div class="input-group-append">
+            <div class="input-group-text">
+                <span class="fas fa-user"></span>
+            </div>
+        </div>
+        <span asp-validation-for="Surname" class="d-block text-danger"></span>
+    </div>
+    <div class="input-group mb-3">
+        <input asp-for="Email" class="form-control" placeholder="@Html.DisplayNameFor(m => m.Email)">
+        <div class="input-group-append">
+            <div class="input-group-text">
+                <span class="fas fa-envelope"></span>
+            </div>
+        </div>
+        <span asp-validation-for="Email" class="d-block text-danger"></span>
+    </div>
+    <div class="input-group mb-3">
+        <input asp-for="Password" class="form-control" placeholder="@Html.DisplayNameFor(m => m.Password)">
+        <div class="input-group-append">
+            <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+            </div>
+        </div>
+        <span asp-validation-for="Password" class="d-block text-danger"></span>
+    </div>
+    <div class="input-group mb-3">
+        <input asp-for="ConfirmPassword" class="form-control" placeholder="@Html.DisplayNameFor(m => m.ConfirmPassword)">
+        <div class="input-group-append">
+            <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+            </div>
+        </div>
+        <span asp-validation-for="ConfirmPassword" class="d-block text-danger"></span>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            <div class="icheck-primary">
+                <input asp-for="IsAgreeTerms" type="checkbox" value="agree">
+                <label for="agreeTerms">
+                    I agree to the <a href="#">terms</a>
+                </label>
+                <span asp-validation-for="IsAgreeTerms" class="d-block text-danger"></span>
+            </div>
+        </div>
+        <!-- /.col -->
+        <div class="col-4">
+            <button type="submit" class="btn btn-primary btn-block">Register</button>
+        </div>
+        <!-- /.col -->
+    </div>
+</form>

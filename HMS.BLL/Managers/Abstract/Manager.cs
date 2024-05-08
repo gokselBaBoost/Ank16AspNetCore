@@ -37,7 +37,7 @@ namespace HMS.BLL.Managers.Abstract
             return _service.Get(id);
         }
 
-        public IEnumerable<TDto> GetAll()
+        public virtual IEnumerable<TDto> GetAll()
         {
             return _service.GetAll().ToList();
         }

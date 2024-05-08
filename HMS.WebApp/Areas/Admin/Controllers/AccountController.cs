@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using HMS.WebApp.Areas.Admin.Models.Account;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -64,6 +65,24 @@ namespace HMS.WebApp.Areas.Admin.Controllers
         }
 
         public IActionResult Register()
+        {
+            RegisterViewModel model = new RegisterViewModel();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Register(RegisterViewModel model)
+        {
+            if(!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            return RedirectToAction(nameof(Login));
+        }
+
+        public IActionResult ForgotPassword()
         {
             return View();
         }

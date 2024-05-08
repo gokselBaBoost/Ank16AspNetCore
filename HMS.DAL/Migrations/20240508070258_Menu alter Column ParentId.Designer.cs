@@ -4,6 +4,7 @@ using HMS.DAL.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HMS.DAL.Migrations
 {
     [DbContext(typeof(HmsDbContext))]
-    partial class HmsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240508070258_Menu alter Column ParentId")]
+    partial class MenualterColumnParentId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,47 +25,6 @@ namespace HMS.DAL.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("HMS.Entities.AccountUser", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AccountType")
-                        .HasColumnType("int");
-
-                    b.Property<DateOnly>("BirthDate")
-                        .HasColumnType("date");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Surname")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("Updated")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AccountUser");
-                });
-
             modelBuilder.Entity("HMS.Entities.City", b =>
                 {
                     b.Property<int>("Id")
@@ -70,9 +32,6 @@ namespace HMS.DAL.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("AccountUserId")
-                        .HasColumnType("int");
 
                     b.Property<int>("CountryId")
                         .HasColumnType("int");
@@ -90,9 +49,10 @@ namespace HMS.DAL.Migrations
                     b.Property<DateTime?>("Updated")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("Id");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
-                    b.HasIndex("AccountUserId");
+                    b.HasKey("Id");
 
                     b.HasIndex("CountryId");
 
@@ -107,9 +67,6 @@ namespace HMS.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("AccountUserId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
@@ -123,9 +80,10 @@ namespace HMS.DAL.Migrations
                     b.Property<DateTime?>("Updated")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("Id");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
-                    b.HasIndex("AccountUserId");
+                    b.HasKey("Id");
 
                     b.ToTable("Countries");
                 });
@@ -137,9 +95,6 @@ namespace HMS.DAL.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("AccountUserId")
-                        .HasColumnType("int");
 
                     b.Property<int>("CityId")
                         .HasColumnType("int");
@@ -163,8 +118,6 @@ namespace HMS.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AccountUserId");
-
                     b.HasIndex("CityId");
 
                     b.HasIndex("CountryId");
@@ -181,19 +134,19 @@ namespace HMS.DAL.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Action")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Area")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Controller")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -206,6 +159,7 @@ namespace HMS.DAL.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Url")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -217,36 +171,17 @@ namespace HMS.DAL.Migrations
 
             modelBuilder.Entity("HMS.Entities.City", b =>
                 {
-                    b.HasOne("HMS.Entities.AccountUser", "AccountUser")
-                        .WithMany()
-                        .HasForeignKey("AccountUserId");
-
                     b.HasOne("HMS.Entities.Country", "Country")
                         .WithMany("Cities")
                         .HasForeignKey("CountryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("AccountUser");
-
                     b.Navigation("Country");
-                });
-
-            modelBuilder.Entity("HMS.Entities.Country", b =>
-                {
-                    b.HasOne("HMS.Entities.AccountUser", "AccountUser")
-                        .WithMany()
-                        .HasForeignKey("AccountUserId");
-
-                    b.Navigation("AccountUser");
                 });
 
             modelBuilder.Entity("HMS.Entities.Hotel", b =>
                 {
-                    b.HasOne("HMS.Entities.AccountUser", "AccountUser")
-                        .WithMany()
-                        .HasForeignKey("AccountUserId");
-
                     b.HasOne("HMS.Entities.City", "City")
                         .WithMany()
                         .HasForeignKey("CityId")
@@ -259,8 +194,6 @@ namespace HMS.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("AccountUser");
-
                     b.Navigation("City");
 
                     b.Navigation("Country");
@@ -269,7 +202,7 @@ namespace HMS.DAL.Migrations
             modelBuilder.Entity("HMS.Entities.Menu", b =>
                 {
                     b.HasOne("HMS.Entities.Menu", "SubMenu")
-                        .WithMany("Menus")
+                        .WithMany("ChildMenus")
                         .HasForeignKey("ParentId");
 
                     b.Navigation("SubMenu");
@@ -282,7 +215,7 @@ namespace HMS.DAL.Migrations
 
             modelBuilder.Entity("HMS.Entities.Menu", b =>
                 {
-                    b.Navigation("Menus");
+                    b.Navigation("ChildMenus");
                 });
 #pragma warning restore 612, 618
         }

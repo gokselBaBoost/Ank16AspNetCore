@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace HMS.WebApp.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class CountryController : Controller
     {
         private CountryManager _countryManager;
@@ -32,7 +33,6 @@ namespace HMS.WebApp.Areas.Admin.Controllers
             _mapper = config.CreateMapper();
         }
 
-        [Authorize]
         public IActionResult Index()
         {
             //List<Country> countries = GetCountries(); //_hmsDbContext.Countries.ToList();

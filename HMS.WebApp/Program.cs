@@ -37,6 +37,16 @@ builder.Services.AddSingleton<CityRepo>();
 builder.Services.AddSingleton<CityService>();
 builder.Services.AddSingleton<CityManager>();
 
+// Menu Implimentation
+builder.Services.AddSingleton<MenuRepo>();
+builder.Services.AddSingleton<MenuService>();
+builder.Services.AddSingleton<MenuManager>();
+
+// AccountUser Implimentation
+builder.Services.AddSingleton<AccountUserRepo>();
+builder.Services.AddSingleton<AccountUserService>();
+builder.Services.AddSingleton<AccountUserManager>();
+
 
 builder.Services.AddSingleton<IMailService, GmailService>();    // Her zaman her istek tek örnek
 //builder.Services.AddScoped<IMailService, GmailService>();     // İstek başına tek örnek
@@ -45,6 +55,8 @@ builder.Services.AddSingleton<IMailService, GmailService>();    // Her zaman her
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
+
+app.UseDeveloperExceptionPage();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.EnvironmentName == "Home")
