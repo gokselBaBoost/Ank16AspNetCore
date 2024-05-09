@@ -16,15 +16,19 @@ Console.WriteLine(builder.Configuration.GetConnectionString("HmsDbConStr"));
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(opt =>
                 {
-                    opt.Cookie.Name = "auth";
+                    opt.Cookie.Name = "HmsApp.Session";
+                    opt.Cookie.MaxAge = TimeSpan.FromSeconds(10);
                     opt.LoginPath = "/Admin/Account/Login";     // Account/Login
                     opt.LogoutPath = "/Admin/Account/Logout";   // Account/Logout
+                    opt.ExpireTimeSpan = TimeSpan.FromSeconds(20);
+                    opt.SlidingExpiration = true;
                 });
 
 builder.Services.AddSession(opt =>
 {
-    opt.Cookie.Name = "auth";
+    opt.Cookie.Name = "HmsApp.Session";
     opt.IdleTimeout = TimeSpan.FromSeconds(30);
+    opt.Cookie.IsEssential = true;
 });
 
 // Add services to the container.

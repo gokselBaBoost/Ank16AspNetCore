@@ -5,7 +5,7 @@
     ViewBag.ForgotPasswordLink = true;
     ViewBag.RegisterLink = true;
 }
-
+<h1>@ViewBag.SessionId</h1>
 <form asp-area="Admin" asp-controller="Account" asp-action="Login" method="post">
     <div class="input-group mb-3">
         <input name="email" type="email" class="form-control" placeholder="Email">

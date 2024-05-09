@@ -33,7 +33,7 @@ namespace HMS.DAL.Context
                 AccountType = Entities.Common.AccountType.Admin,
                 BirthDate = new DateOnly(2000,1,1),
                 Created = DateTime.Now,
-                Password = Sifreleme.Md5Hash("123456789")
+                Password = Sifreleme.Md5Hash("Abcd*1234")
             });
         }
     }

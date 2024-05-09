@@ -34,6 +34,12 @@ namespace HMS.WebApp.Areas.Admin.Controllers
         {
             //string deneme = Sifreleme.Md5Hash("abc123");
 
+            ViewBag.SessionId = HttpContext.Session.Id;
+            var session = HttpContext.Session;
+            var req_cookiee = HttpContext.Request.Cookies;
+            var res_cookiee = HttpContext.Response.Cookies;
+
+
             return View();
         }
 
