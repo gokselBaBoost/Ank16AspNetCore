@@ -18,15 +18,18 @@ namespace HMS.WebApp.Areas.Admin.Models.Account
         [EmailAddress(ErrorMessage = "Lütfen geçerli bir mail adresi giriniz")]
         public string Email { get; set; }
 
+        [Required(ErrorMessage = "Lütfen doğum tarihinizi giriniz")]
+        [DataType(DataType.Date)]
+        public DateOnly BirthDate { get; set; } = new DateOnly(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+
         [Required(ErrorMessage = "Lütfen şifre giriniz.")]
-        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,10}$")]
+        [RegularExpression(@"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#.?!@$%^&*-]).{8,}$", ErrorMessage = "Şifreniz en az 8 karakter en fazla 10 karakter olmalıdır. İçinde sayı ve karakter içermelidir.")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        [Required(ErrorMessage = "Lütfen şifre giriniz.")]
-        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,10}$")]
+        [Required(ErrorMessage = "Lütfen tekrar şifresini giriniz.")]
         [DataType(DataType.Password)]
-        [Compare("Password", ErrorMessage = "Şifreler aynı değil")]
+        [Compare("Password", ErrorMessage = "Girdiğiniz şifreler aynı değil")]
         public string ConfirmPassword { get; set; }
         public bool IsAgreeTerms { get; set; }
     }

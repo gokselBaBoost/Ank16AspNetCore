@@ -3,6 +3,7 @@ using HMS.DAL.Context;
 using HMS.DAL.Repositories.Concrete;
 using HMS.DAL.Services.Concrete;
 using HMS.DAL.Services.Profiles;
+using HMS.WebApp.Areas.Admin.Filters;
 using HMS.WebApp.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
@@ -15,9 +16,16 @@ Console.WriteLine(builder.Configuration.GetConnectionString("HmsDbConStr"));
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(opt =>
                 {
+                    opt.Cookie.Name = "auth";
                     opt.LoginPath = "/Admin/Account/Login";     // Account/Login
                     opt.LogoutPath = "/Admin/Account/Logout";   // Account/Logout
                 });
+
+builder.Services.AddSession(opt =>
+{
+    opt.Cookie.Name = "auth";
+    opt.IdleTimeout = TimeSpan.FromSeconds(30);
+});
 
 // Add services to the container.
 builder.Services.AddDbContext<HmsDbContext>(opts =>
@@ -52,7 +60,12 @@ builder.Services.AddSingleton<IMailService, GmailService>();    // Her zaman her
 //builder.Services.AddScoped<IMailService, GmailService>();     // İstek başına tek örnek
 //builder.Services.AddTransient<IMailService, GmailService>();  // İstek başına ve istenmesi ayrı örnek
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(opt =>
+{
+    var x = opt.Filters;
+
+    opt.Filters.Add<UserInfoActionFilter>();
+});
 
 var app = builder.Build();
 
@@ -89,6 +102,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseSession();
 
 app.UseAuthentication();
 app.UseAuthorization();

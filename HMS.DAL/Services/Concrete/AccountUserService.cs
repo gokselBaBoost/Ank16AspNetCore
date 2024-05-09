@@ -11,10 +11,17 @@ using System.Threading.Tasks;
 
 namespace HMS.DAL.Services.Concrete
 {
-    public class AccountUserService : Service<AccountUser, AccountUserDto>
+    public class AccountUserService : Service<AccountUser, AccountUserDto>, IAccountUserService
     {
         public AccountUserService(AccountUserRepo repo) : base(repo)
         {
+        }
+
+        public AccountUserDto? FindLoginUser(string username, string password)
+        {
+            AccountUser? accountUser = (base._repo as IAccountUserRepo).FindLoginUser(username, password);
+
+            return _mapper.Map<AccountUserDto>(accountUser);
         }
     }
 }

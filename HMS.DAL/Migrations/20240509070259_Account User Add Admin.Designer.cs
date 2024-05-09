@@ -4,6 +4,7 @@ using HMS.DAL.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HMS.DAL.Migrations
 {
     [DbContext(typeof(HmsDbContext))]
-    partial class HmsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240509070259_Account User Add Admin")]
+    partial class AccountUserAddAdmin
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -68,10 +71,10 @@ namespace HMS.DAL.Migrations
                             Id = 1,
                             AccountType = 1,
                             BirthDate = new DateOnly(2000, 1, 1),
-                            Created = new DateTime(2024, 5, 9, 10, 52, 31, 565, DateTimeKind.Local).AddTicks(8400),
+                            Created = new DateTime(2024, 5, 9, 10, 2, 58, 636, DateTimeKind.Local).AddTicks(7917),
                             Email = "admin@hmsapp.com",
                             Name = "Admin",
-                            Password = "25f9e794323b453885f5181f1b624d0b",
+                            Password = "123456789",
                             Surname = "Admin"
                         });
                 });

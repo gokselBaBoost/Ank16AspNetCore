@@ -9,10 +9,17 @@ using System.Threading.Tasks;
 
 namespace HMS.DAL.Repositories.Concrete
 {
-    public class AccountUserRepo : Repo<AccountUser>
+    public class AccountUserRepo : Repo<AccountUser>, IAccountUserRepo
     {
         public AccountUserRepo(HmsDbContext dbContext) : base(dbContext)
         {
+        }
+
+        public AccountUser? FindLoginUser(string username, string password)
+        {
+            return base._dbContext.AccountUsers
+                                  .Where(au => au.Email == username && au.Password == password)
+                                  .SingleOrDefault();
         }
     }
 }

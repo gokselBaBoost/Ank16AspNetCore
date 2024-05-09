@@ -11,10 +11,15 @@ using System.Threading.Tasks;
 
 namespace HMS.BLL.Managers.Concrete
 {
-    public class AccountUserManager : Manager<AccountUserDto, AccountUser>
+    public class AccountUserManager : Manager<AccountUserDto, AccountUser>, IAccountUserManager
     {
         public AccountUserManager(AccountUserService service) : base(service)
         {
+        }
+
+        public AccountUserDto? FindLoginUser(string username, string password)
+        {
+            return (base._service as IAccountUserService).FindLoginUser(username, password);
         }
     }
 }
