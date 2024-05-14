@@ -1,3 +1,4 @@
+using HMS.BLL.Managers.Concrete;
 using HMS.WebApp.Models;
 using HMS.WebApp.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -10,11 +11,13 @@ namespace HMS.WebApp.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IMailService _mailService;
+        private CountryManager _countryManager;
 
-        public HomeController(ILogger<HomeController> logger, IMailService mailService)
+        public HomeController(ILogger<HomeController> logger, IMailService mailService, CountryManager countryManager)
         {
             _logger = logger;
             _mailService = mailService;
+            _countryManager = countryManager;
         }
 
         public IActionResult Index()
@@ -34,6 +37,47 @@ namespace HMS.WebApp.Controllers
 
             return View();
         }
+
+        [ResponseCache(Duration = 30, Location = ResponseCacheLocation.Any)]
+        public IActionResult About()
+        {
+            ViewData["msg"] = "About";
+            ViewData["Date"] = DateTime.Now;
+            return View();
+        }
+
+        [ResponseCache(Duration = 30, Location = ResponseCacheLocation.Any)]
+        public IActionResult Contact()
+        {
+            ViewData["msg"] = "Contact";
+            ViewData["Date"] = DateTime.Now;
+            return View();
+        }
+
+        [ResponseCache(Duration = 30, Location = ResponseCacheLocation.Any)]
+        public IActionResult Help()
+        {
+            ViewData["msg"] = "Help";
+            ViewData["Date"] = DateTime.Now;
+            return View();
+        }
+
+        [ResponseCache(Duration = 30, Location = ResponseCacheLocation.Any, VaryByQueryKeys = new[] { "countryId" })]
+        public IActionResult Page(int countryId)
+        {
+            ViewData["msg"] = "Help";
+            ViewData["Date"] = DateTime.Now;
+            ViewData["CountryName"] = _countryManager?.Get(countryId)?.Name;
+            return View();
+        }
+
+        //[ResponseCache(Duration = 300, Location = ResponseCacheLocation.Any,  VaryByQueryKeys = new string[] { "id" })]
+        //[HttpGet]
+        //public async Task<IActionResult> Index(int id)
+        //{
+        //    ViewBag.Id = id * new Random().Next(2,4);
+        //    return View();
+        //}
 
         [ResponseCache(Duration = 10, VaryByHeader = "Time-To-Local")]
         public string CacheTime()

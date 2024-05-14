@@ -1,0 +1,26 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<p>
+    GetUserInfo Page :
+    @if(ViewBag.Status == 1){
+        <ul>
+            <li>@ViewBag.SessionId</li>
+            <li>@ViewBag.UserName</li>
+            <li>@ViewBag.UserAge</li>
+            <li>@ViewBag.UserMail</li>
+            <li>@ViewBag.UserMailString</li>
+        </ul>
+    }
+    else if (ViewBag.Status == 0)
+    {
+        <span class="text-warning">@ViewBag.ErrorMessage</span>
+    }
+    else
+    {
+        <span class="text-danger">@ViewBag.ErrorMessage</span>
+    }
+    
+</p>

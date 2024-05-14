@@ -39,10 +39,12 @@ builder.Services.AddDbContext<HmsDbContext>(opts =>
 
 builder.Services.AddAutoMapper(typeof(Assembly));
 
+builder.Services.AddResponseCaching();
+
 // Country Implimentation
-builder.Services.AddSingleton<CountryRepo>();
-builder.Services.AddSingleton<CountryService>();
-builder.Services.AddSingleton<CountryManager>();
+builder.Services.AddTransient<CountryRepo>();
+builder.Services.AddTransient<CountryService>();
+builder.Services.AddTransient<CountryManager>();
 
 // City Implimentation
 builder.Services.AddSingleton<CityRepo>();
@@ -111,6 +113,22 @@ app.UseSession();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseResponseCaching();
+
+//app.Use(async (context, next) =>
+//{
+//    context.Response.GetTypedHeaders().CacheControl =
+//        new Microsoft.Net.Http.Headers.CacheControlHeaderValue()
+//        {
+//            Public = true,
+//            MaxAge = TimeSpan.FromSeconds(10)
+//        };
+//    context.Response.Headers[Microsoft.Net.Http.Headers.HeaderNames.Vary] =
+//        new string[] { "Accept-Encoding" };
+
+//    await next();
+//});
 
 app.MapControllerRoute(
     name: "anasayfa",
