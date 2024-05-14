@@ -1,0 +1,33 @@
+﻿@model UserViewModel
+<div class="card">
+    <h5 class="card-header">Add User</h5>
+    <div class="card-body">
+        <h5 class="card-title">User create page for Application</h5>
+        <form asp-controller="User" asp-action="Add">
+            <div asp-validation-summary="ModelOnly"></div>
+            <div class="mb-3">
+                <label asp-for="Email" class="form-label">@Html.DisplayNameFor(m => m.Email)</label>
+                <input asp-for="Email" class="form-control">
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="UserName" class="form-label">@Html.DisplayNameFor(m => m.UserName)</label>
+                <input asp-for="UserName" class="form-control">
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Password" class="form-label">@Html.DisplayNameFor(m => m.Password)</label>
+                <input asp-for="Password" class="form-control">
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="ConfirmPassword" class="form-label">@Html.DisplayNameFor(m => m.ConfirmPassword)</label>
+                <input asp-for="ConfirmPassword" class="form-control">
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <input type="submit" class="btn btn-success" value="Kaydet">
+            </div>
+        </form>
+    </div>
+</div>
