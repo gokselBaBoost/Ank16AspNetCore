@@ -4,11 +4,31 @@
     <div class="card-body">
         <h5 class="card-title">User create page for Application</h5>
         <form asp-controller="User" asp-action="Add">
-            <div asp-validation-summary="ModelOnly"></div>
+            <div asp-validation-summary="All"></div>
             <div class="mb-3">
                 <label asp-for="Email" class="form-label">@Html.DisplayNameFor(m => m.Email)</label>
                 <input asp-for="Email" class="form-control">
                 <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label">@Html.DisplayNameFor(m => m.Name)</label>
+                <input asp-for="Name" class="form-control">
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Surname" class="form-label">@Html.DisplayNameFor(m => m.Surname)</label>
+                <input asp-for="Surname" class="form-control">
+                <span asp-validation-for="Surname" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="BirthDate" class="form-label">@Html.DisplayNameFor(m => m.BirthDate)</label>
+                <input asp-for="BirthDate" class="form-control">
+                <span asp-validation-for="BirthDate" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="FavoriteTeam" class="form-label">@Html.DisplayNameFor(m => m.FavoriteTeam)</label>
+                <select asp-for="FavoriteTeam" asp-items="Html.GetEnumSelectList<FavoriteTeam>()" class="form-control"></select>
+                <span asp-validation-for="FavoriteTeam" class="text-danger"></span>
             </div>
             <div class="mb-3">
                 <label asp-for="UserName" class="form-label">@Html.DisplayNameFor(m => m.UserName)</label>

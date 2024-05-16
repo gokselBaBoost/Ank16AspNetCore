@@ -10,5 +10,6 @@ namespace Example02.IdentityWebApp.Data
         {}
 
         public DbSet<Book> Books { get; set; }
+        //public DbSet<AppUser> AppUsers { get; set; }
     }
 }

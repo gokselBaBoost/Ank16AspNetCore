@@ -7,6 +7,19 @@ namespace Example02.IdentityWebApp.Models
         [Display(Name = "Kullaıcı Adı")]
         public string UserName { get; set; }
 
+        [Display(Name = "Adı")]
+        public string Name { get; set; }
+
+        [Display(Name = "Soyadı")]
+        public string Surname { get; set; }
+
+        [Display(Name = "Doğum Tarihi")]
+        [DataType(DataType.Date)]
+        public DateOnly BirthDate { get; set; } = DateOnly.FromDateTime(DateTime.Now);
+
+        [Display(Name = "Favori Takımınız")]
+        public FavoriteTeam FavoriteTeam { get; set; }
+
         [EmailAddress]
         [Display(Name = "E-Posta Adresi")]
         public string Email { get; set; }

@@ -1,4 +1,5 @@
 ﻿using Example02.IdentityWebApp.Data;
+using Example02.IdentityWebApp.Data.Entities;
 using Example02.IdentityWebApp.Helpers;
 using Example02.IdentityWebApp.Models;
 using Microsoft.AspNetCore.Identity;
@@ -9,20 +10,17 @@ namespace Example02.IdentityWebApp.Controllers
     public class UserController : Controller
     {
         private AppDbContext _dbContext;
-        private UserManager<IdentityUser> _userManager;
-        private ControllerContext _controllerContext;
+        private UserManager<AppUser> _userManager;
 
-        public UserController(AppDbContext dbContext, UserManager<IdentityUser> userManager, ControllerContext context
-            )
+        public UserController(AppDbContext dbContext, UserManager<AppUser> userManager)
         {
             _dbContext = dbContext;
             _userManager = userManager;
-            _controllerContext = context;
         }
 
         public IActionResult Index()
         {
-            PartialView().ExecuteResult(_controllerContext);
+            //PartialView().ExecuteResult(_controllerContext);
 
             return View();
         }
@@ -41,11 +39,30 @@ namespace Example02.IdentityWebApp.Controllers
                 return View(model);
             }
 
+
+            //var users = _userManager;
+            var users = _userManager.Users.ToList();
+
+            //AppUser userCheck = _dbContext.AppUsers.Where(u => u.Email == "admin@mail.com").SingleOrDefault();  //FindByNameAsync(model.UserName).Result; // Email e bakıyor
+
+            //if(userCheck != null)
+            //{
+            //    ViewBag.Error = "Kullanıcı Adı daha önceden kullanılmıştır";
+
+            //    ModelState.AddModelError("UserName", "Kullanıcı Adı daha önceden kullanılıyor.");
+
+            //    return View(model);
+            //}
+
             //User Kayıt işlemleri yapılacaktır.
 
-            IdentityUser user = new IdentityUser();
+            AppUser user = new AppUser();
             user.UserName = model.UserName;
             user.Email = model.Email;
+            user.Name = model.Name;
+            user.Surname = model.Surname;
+            user.BirthDate = model.BirthDate;
+            user.FavoriteTeam = model.FavoriteTeam;
             //user.PasswordHash = Sifreleme.Md5Hash(model.Password); //Password Hash size ait olan bir hash provider ile çözümleye bilirsiniz.
 
             //_dbContext.Users.Add(user);
@@ -54,11 +71,17 @@ namespace Example02.IdentityWebApp.Controllers
 
             //var result = await _userManager.CreateAsync(user);
             //Task<IdentityResult> result = _userManager.CreateAsync(user);
+
             IdentityResult result = _userManager.CreateAsync(user,model.Password).Result;
 
             //Eğer kayıt başarılı ise Index sayfasına geri döncektir.
             if(result.Succeeded)
             {
+                //Mail Gönderimi yapılır
+                string token = _userManager.GenerateEmailConfirmationTokenAsync(user).Result;
+
+                //MailSend(model.Email, model.);
+
                 return RedirectToAction(nameof(Index));
             }
 
