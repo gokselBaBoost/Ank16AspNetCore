@@ -54,6 +54,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example02.IdentityWebApp", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example03.IdentityPageWebApp", "Example03.IdentityPageWebApp\Example03.IdentityPageWebApp.csproj", "{75313F1A-83EA-4D66-861A-1683AD2C1144}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example04.IdentityCustomWebApp", "Example04.IdentityCustomWebApp\Example04.IdentityCustomWebApp.csproj", "{EBEF7F11-CCA4-441F-859C-48C622DE82A2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -136,6 +138,10 @@ Global
 		{75313F1A-83EA-4D66-861A-1683AD2C1144}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75313F1A-83EA-4D66-861A-1683AD2C1144}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{75313F1A-83EA-4D66-861A-1683AD2C1144}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBEF7F11-CCA4-441F-859C-48C622DE82A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBEF7F11-CCA4-441F-859C-48C622DE82A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBEF7F11-CCA4-441F-859C-48C622DE82A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBEF7F11-CCA4-441F-859C-48C622DE82A2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -151,6 +157,7 @@ Global
 		{C0752D40-84A3-49F8-8F72-C3B2CD16D082} = {EC22BDD8-1F17-4F2C-A5CA-2D68048A0131}
 		{41806D77-A0F9-4002-A5AE-F5DD0DEB5C4E} = {EC22BDD8-1F17-4F2C-A5CA-2D68048A0131}
 		{75313F1A-83EA-4D66-861A-1683AD2C1144} = {EC22BDD8-1F17-4F2C-A5CA-2D68048A0131}
+		{EBEF7F11-CCA4-441F-859C-48C622DE82A2} = {EC22BDD8-1F17-4F2C-A5CA-2D68048A0131}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7334CD99-2313-41E9-976F-D183F32E795C}
