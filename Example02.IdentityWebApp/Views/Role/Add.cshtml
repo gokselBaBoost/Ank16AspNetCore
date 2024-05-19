@@ -1,0 +1,18 @@
+﻿@model RoleViewModel
+<div class="card">
+    <h5 class="card-header">Add Role</h5>
+    <div class="card-body">
+        <h5 class="card-title">User create page for Application</h5>
+        <form asp-controller="Role" asp-action="Add">
+            <div asp-validation-summary="All"></div>
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label">@Html.DisplayNameFor(m => m.Name)</label>
+                <input asp-for="Name" class="form-control">
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <input type="submit" class="btn btn-success" value="Kaydet">
+            </div>
+        </form>
+    </div>
+</div>

@@ -19,7 +19,7 @@ namespace Example02.IdentityWebApp.Controllers
             return View();
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin,Moderator")]
         public IActionResult Privacy()
         {
             return View();

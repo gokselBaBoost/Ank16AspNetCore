@@ -9,8 +9,5 @@ namespace Example02.IdentityWebApp.Data.Entities
         public string Surname { get; set; }
         public DateOnly BirthDate { get; set; }
         public FavoriteTeam FavoriteTeam { get; set; }
-
-        public int Test { get; set; }
-
     }
 }

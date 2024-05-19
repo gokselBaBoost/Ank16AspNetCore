@@ -9,14 +9,17 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+// Authentication Service Implementation
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie();
 
+// DbContext Service Implementation
 builder.Services.AddDbContext<AppDbContext>( opt =>
 {
     opt.UseSqlServer(builder.Configuration.GetConnectionString("AppDbConStr"));
 });
 
+// Identity Service Implementation
 builder.Services.AddIdentity<AppUser,IdentityRole>(opt =>
 {
     opt.SignIn.RequireConfirmedEmail = true;
@@ -27,11 +30,18 @@ builder.Services.AddIdentity<AppUser,IdentityRole>(opt =>
     //opt.Password.RequireLowercase = false;
     //opt.Password.RequireUppercase = false;
 
-}).AddEntityFrameworkStores<AppDbContext>();
+    opt.User.RequireUniqueEmail = true;
+
+}).AddDefaultTokenProviders()
+  .AddEntityFrameworkStores<AppDbContext>();
+
+
 
 builder.Services.ConfigureApplicationCookie(opt =>
 {
     //opt.LoginPath = "/User/Login";
+    //opt.LogoutPath = "/User/Logout";
+    //opt.AccessDeniedPath = "/Home/AccessDenied";
 });
 
 var app = builder.Build();
@@ -48,6 +58,9 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+//app.UseSession();
+app.UseAuthentication();
 
 app.UseAuthorization();
 

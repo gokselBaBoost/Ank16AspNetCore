@@ -1,0 +1,18 @@
+﻿<div class="card">
+    <h5 class="card-header">Add Role To User</h5>
+    <div class="card-body">
+        <h5 class="card-title">User add role create page for Application</h5>
+        <form asp-controller="User" asp-action="AddRole">
+            <div asp-validation-summary="All"></div>
+            <div class="mb-3">
+                <label for="roleId" class="form-label">Role Adı</label>
+                <select name="roleId" id="roleId" class="form-control" asp-items="@ViewBag.RoleList">
+                </select>
+                <input type="hidden" name="userId" id="userId" value="@ViewBag.UserId" />
+            </div>
+            <div class="mb-3">
+                <input type="submit" class="btn btn-success" value="Kaydet">
+            </div>
+        </form>
+    </div>
+</div>

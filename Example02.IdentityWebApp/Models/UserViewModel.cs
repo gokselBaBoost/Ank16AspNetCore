@@ -4,6 +4,8 @@ namespace Example02.IdentityWebApp.Models
 {
     public class UserViewModel
     {
+        public string UserId { get; set; }
+
         [Display(Name = "Kullaıcı Adı")]
         public string UserName { get; set; }
 

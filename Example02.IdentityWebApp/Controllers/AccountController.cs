@@ -1,4 +1,5 @@
-﻿using Example02.IdentityWebApp.Models;
+﻿using Example02.IdentityWebApp.Data.Entities;
+using Example02.IdentityWebApp.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -7,10 +8,10 @@ namespace Example02.IdentityWebApp.Controllers
 {
     public class AccountController : Controller
     {
-        private UserManager<IdentityUser> _userManager;
-        private SignInManager<IdentityUser> _signInManager;
+        private UserManager<AppUser> _userManager;
+        private SignInManager<AppUser> _signInManager;
 
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -30,19 +31,11 @@ namespace Example02.IdentityWebApp.Controllers
                 return View(model);
             }
 
-            IdentityUser? user = _userManager.FindByEmailAsync(model.Email).Result;
+            AppUser? user = _userManager.FindByEmailAsync(model.Email).Result;
 
-            if(user == null)
+            if (user == null)
             {
                 ViewBag.ErrorMessage = "Kullanıcı adı veya şifre yanlışır.";
-                return View(model);
-            }
-
-            bool emailConfirm = _userManager.IsEmailConfirmedAsync(user).Result;
-
-            if(!emailConfirm)
-            {
-                ViewBag.ErrorMessage = "Mail doğrulanmamıştır.";
                 return View(model);
             }
 
@@ -50,12 +43,27 @@ namespace Example02.IdentityWebApp.Controllers
 
             if(!signInResult.Succeeded)
             {
+                bool emailConfirm = _userManager.IsEmailConfirmedAsync(user).Result;
+
+                if (!emailConfirm)
+                {
+                    ViewBag.ErrorMessage = "Mail doğrulanmamıştır.";
+                    return View(model);
+                }
+
                 ViewBag.ErrorMessage = "Kullanıcı adı veya şifre yanlışır.";
                 return View(model);
             }
 
 
             return RedirectToAction("Privacy", "Home");
+        }
+    
+        public IActionResult AccessDenied()
+        {
+            var user = HttpContext.User;
+
+            return View();
         }
     }
 }

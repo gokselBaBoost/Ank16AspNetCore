@@ -1,0 +1,29 @@
+﻿@{
+    var userId = Context.Request.RouteValues["id"];
+}
+<div class="card">
+    <h5 class="card-header">@ViewBag.NameSurname Rolleri</h5>
+    <div class="card-body">
+        <h5 class="card-title">Kullanıcının sahip olduğu rollerin listesi aşağıdadır.</h5>
+        <div id="userRoles" data-url="@Url.ActionLink("UserRoleUpdate", "Role", new { id = @userId })">
+            @foreach (IdentityRole role in ViewBag.Roles)
+            {
+
+                string hasRole = (ViewBag.RolesToUser as List<string>).Contains(role.Name) ? "checked" : "";
+                <div class="d-flex align-items-center" id="role-box-@role.Id">
+                    <div class="form-check">
+                        <label for="@role.Id" class="form-check-label">@role.Name</label>
+                        <input type="checkbox" name="role-@role.Id" id="@role.Id" class="form-check-input" @hasRole />
+                    </div>
+                    <div class="spinner-border spinner-border-sm text-primary ms-2" style="display:none" aria-hidden="true" id="spinner-@role.Id"></div>
+                    <strong role="status" class="ms-2"></strong>
+                </div>
+                
+            }
+            <span role="alert" class="text-danger" id="userRolesError"></span>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script type="text/javascript" src="~/js/user/addrole.js"></script>
+}

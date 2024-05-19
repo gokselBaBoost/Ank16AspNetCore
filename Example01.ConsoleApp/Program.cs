@@ -1,5 +1,7 @@
 ﻿
 
+using System.Text;
+
 namespace Example01.ConsoleApp
 {
     internal class Program
@@ -46,6 +48,13 @@ namespace Example01.ConsoleApp
 
         static void Main(string[] args)
         {
+            string pass = "ubdqouzvwhbnazmo";
+
+            var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(pass);
+            Console.WriteLine(Convert.ToBase64String(plainTextBytes));
+
+            Console.ReadLine();
+
             //FirstThread();
             FirstThreadAsync();
 
