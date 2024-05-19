@@ -1,11 +1,14 @@
-﻿using HMS.BLL.Managers.Concrete;
+﻿using FluentValidation;
+using HMS.BLL.Managers.Concrete;
 using HMS.DAL.Context;
 using HMS.DAL.Repositories.Concrete;
 using HMS.DAL.Services.Concrete;
 using HMS.DAL.Services.Profiles;
+using HMS.Entities;
 using HMS.WebApp.Areas.Admin.Filters;
 using HMS.WebApp.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
@@ -13,16 +16,65 @@ var builder = WebApplication.CreateBuilder(args);
 
 Console.WriteLine(builder.Configuration.GetConnectionString("HmsDbConStr"));
 
+//builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+//                .AddCookie(opt =>
+//                {
+//                    opt.Cookie.Name = "HmsApp.Session";
+//                    opt.Cookie.MaxAge = TimeSpan.FromSeconds(10);
+//                    opt.LoginPath = "/Admin/Account/Login";     // Account/Login
+//                    opt.LogoutPath = "/Admin/Account/Logout";   // Account/Logout
+//                    opt.ExpireTimeSpan = TimeSpan.FromSeconds(20);
+//                    opt.SlidingExpiration = true;
+//                });
+
+//builder.Services.AddSession(opt =>
+//{
+//    opt.Cookie.Name = "HmsApp.Session";
+//    opt.IdleTimeout = TimeSpan.FromSeconds(30);
+//    opt.Cookie.IsEssential = true;
+//});
+
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(opt =>
-                {
-                    opt.Cookie.Name = "HmsApp.Session";
-                    opt.Cookie.MaxAge = TimeSpan.FromSeconds(10);
-                    opt.LoginPath = "/Admin/Account/Login";     // Account/Login
-                    opt.LogoutPath = "/Admin/Account/Logout";   // Account/Logout
-                    opt.ExpireTimeSpan = TimeSpan.FromSeconds(20);
-                    opt.SlidingExpiration = true;
-                });
+                .AddCookie();
+
+// Add services to the container.
+builder.Services.AddDbContext<HmsDbContext>(opts =>
+{
+    opts.UseLazyLoadingProxies(false).UseSqlServer(builder.Configuration.GetConnectionString("HmsDbConStr"));
+}, ServiceLifetime.Scoped);
+
+builder.Services.AddAutoMapper(typeof(Assembly));
+
+//builder.Services.AddResponseCaching();
+
+builder.Services.AddIdentity<AppUser, IdentityRole>(opt =>
+{
+    opt.SignIn.RequireConfirmedEmail = true;
+
+    opt.User.RequireUniqueEmail = true;
+    
+    opt.Password.RequireDigit = true;
+    opt.Password.RequireLowercase = true;
+    opt.Password.RequireUppercase = true;
+    opt.Password.RequireNonAlphanumeric = true;
+    opt.Password.RequiredUniqueChars = 1;
+    opt.Password.RequiredLength = 10;
+
+})
+.AddDefaultTokenProviders()
+.AddEntityFrameworkStores<HmsDbContext>();
+
+builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+
+builder.Services.ConfigureApplicationCookie(opt =>
+{
+    opt.Cookie.Name = "HmsApp.Session";
+    opt.Cookie.MaxAge = TimeSpan.FromSeconds(10);
+    opt.LoginPath = "/Admin/Account/Login";     // Account/Login
+    opt.LogoutPath = "/Admin/Account/Logout";   // Account/Logout
+    opt.ExpireTimeSpan = TimeSpan.FromSeconds(20);
+    opt.SlidingExpiration = true;
+});
 
 builder.Services.AddSession(opt =>
 {
@@ -31,38 +83,28 @@ builder.Services.AddSession(opt =>
     opt.Cookie.IsEssential = true;
 });
 
-// Add services to the container.
-builder.Services.AddDbContext<HmsDbContext>(opts =>
-{
-    opts.UseLazyLoadingProxies(false).UseSqlServer(builder.Configuration.GetConnectionString("HmsDbConStr"));
-});
-
-builder.Services.AddAutoMapper(typeof(Assembly));
-
-builder.Services.AddResponseCaching();
-
 // Country Implimentation
-builder.Services.AddTransient<CountryRepo>();
-builder.Services.AddTransient<CountryService>();
-builder.Services.AddTransient<CountryManager>();
+builder.Services.AddScoped<CountryRepo>();
+builder.Services.AddScoped<CountryService>();
+builder.Services.AddScoped<CountryManager>();
 
 // City Implimentation
-builder.Services.AddSingleton<CityRepo>();
-builder.Services.AddSingleton<CityService>();
-builder.Services.AddSingleton<CityManager>();
+builder.Services.AddScoped<CityRepo>();
+builder.Services.AddScoped<CityService>();
+builder.Services.AddScoped<CityManager>();
 
 // Menu Implimentation
-builder.Services.AddSingleton<MenuRepo>();
-builder.Services.AddSingleton<MenuService>();
-builder.Services.AddSingleton<MenuManager>();
+builder.Services.AddScoped<MenuRepo>();
+builder.Services.AddScoped<MenuService>();
+builder.Services.AddScoped<MenuManager>();
 
 // AccountUser Implimentation
-builder.Services.AddSingleton<AccountUserRepo>();
-builder.Services.AddSingleton<AccountUserService>();
-builder.Services.AddSingleton<AccountUserManager>();
+builder.Services.AddScoped<AccountUserRepo>();
+builder.Services.AddScoped<AccountUserService>();
+builder.Services.AddScoped<AccountUserManager>();
 
 
-builder.Services.AddSingleton<IMailService, GmailService>();    // Her zaman her istek tek örnek
+builder.Services.AddScoped<IMailService, GmailService>();    // Her zaman her istek tek örnek
 //builder.Services.AddScoped<IMailService, GmailService>();     // İstek başına tek örnek
 //builder.Services.AddTransient<IMailService, GmailService>();  // İstek başına ve istenmesi ayrı örnek
 

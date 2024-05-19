@@ -1,162 +1,102 @@
-﻿using AutoMapper;
-using HMS.BLL.Managers.Concrete;
-using HMS.DTO;
+﻿using HMS.DTO;
 using HMS.WebApp.Areas.Admin.Models.Account;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
-using System.Text;
-using System.Security.Cryptography;
-using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
+using FluentValidation;
+using FluentValidation.Results;
+using FluentValidation.AspNetCore;
+using HMS.Entities;
+using Microsoft.AspNetCore.Identity;
+using HMS.WebApp.Services;
 
 namespace HMS.WebApp.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class AccountController : Controller
     {
-        private AccountUserManager _accountUserManager;
-        private IMapper _mapper;
+        private IValidator<LoginViewModel> _validator;
+        private UserManager<AppUser> _userManager;
+        private SignInManager<AppUser> _signInManager;
+        private IMailService _mailService;
 
-        public AccountController(AccountUserManager accountUserManager)
+        public AccountController(IValidator<LoginViewModel> validator, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IMailService mailService)
         {
-            _accountUserManager = accountUserManager;
-
-            MapperConfiguration config = new MapperConfiguration(config =>
-            {
-                config.CreateMap<RegisterViewModel, AccountUserDto>().ReverseMap();
-            });
-
-            _mapper = config.CreateMapper();
+            _validator = validator;
+            _userManager = userManager;
+            _signInManager = signInManager;
+            _mailService = mailService;
         }
-
         public IActionResult Login()
         {
-            //string deneme = Sifreleme.Md5Hash("abc123");
-
-            ViewBag.SessionId = HttpContext.Session.Id;
-            var session = HttpContext.Session;
-            var req_cookiee = HttpContext.Request.Cookies;
-            var res_cookiee = HttpContext.Response.Cookies;
-
-
-            return View();
+            LoginViewModel model = new LoginViewModel();
+            return View(model);
         }
 
         [HttpPost]
-        public IActionResult Login(LoginViewModel model)
+        public async Task<IActionResult> Login(LoginViewModel model)
         {
+            ValidationResult validationResult = await _validator.ValidateAsync(model);
 
-            if (!ModelState.IsValid)
+            if (!validationResult.IsValid)
             {
+                ModelState.Clear();
+                validationResult.AddToModelState(ModelState);
                 return View(model);
             }
 
-            //email ve password check edilecek
-            //db ye gidilip sorulacaktır.
+            AppUser? user = await _userManager.FindByEmailAsync(model.Email);
 
-            AccountUserDto? userDto = _accountUserManager.FindLoginUser(model.Email, Sifreleme.Md5Hash(model.Password));
-
-            if(userDto is not null)
+            if (user == null)
             {
-                Claim name = new Claim(ClaimTypes.Name, userDto.Name);
-                Claim surname = new Claim(ClaimTypes.Surname, userDto.Surname);
-                Claim id = new Claim(ClaimTypes.NameIdentifier, userDto.Id.ToString());
-                Claim emailAddres = new Claim(ClaimTypes.Email, userDto.Email);
+                ModelState.AddModelError("UserNotFound", "Kullanıcı adı veya şifre yanlış");
+                return View(model);
+            }
 
-                List<Claim> claims = new List<Claim>();
-                claims.Add(name);
-                claims.Add(surname);
-                claims.Add(id);
-                claims.Add(emailAddres);
+            Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(user, model.Password, model.RememberMe, true);
 
-
-                ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-                //claimsIdentity.AddClaims(claims);     
-
-
-                ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
-
-                HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal);
-
+            if (result.Succeeded)
                 return RedirectToAction("Index", "Home", new { area = "Admin" });
-            }
 
-
-            ViewBag.FailLogin = "Girişmiş olduğunuz bilgiler yanlıştır.";
-            return View();
-            //doğru ise login yap ve İstenilen sayfaya yönlendir.
-
-            //yanlış ise login sayfasına gerekli uyarı ile yönlendir.
-        }
-
-        public IActionResult Logout()
-        {
-            //Logout işlemi yapılacak
-
-            HttpContext.SignOutAsync();
-
-            return RedirectToAction(nameof(Login));
-        }
-
-        public IActionResult Register()
-        {
-            RegisterViewModel model = new RegisterViewModel();
-
-            return View(model);
-        }
-
-        [HttpPost]
-        public IActionResult Register(RegisterViewModel model)
-        {
-            if(!ModelState.IsValid)
+            if (result.IsLockedOut)
             {
+                //return RedirectToAction("LockOut", "Account", new { area = "Admin" });
+                ModelState.AddModelError("UserNotFound", "Hesabınız kitlenmiştir.");
                 return View(model);
             }
 
-            AccountUserDto userDto = _mapper.Map<AccountUserDto>(model);
-            userDto.AccountType = AccountType.OperationUser;
-            userDto.Password = Sifreleme.Md5Hash(userDto.Password);
+            if (result.RequiresTwoFactor)
+            {
+                return RedirectToAction("LoginWith2fa", "Account", new { area = "Admin" });
+            }
 
-            if(_accountUserManager.Add(userDto) > 0) 
-                return RedirectToAction(nameof(Login));
+            if (result.IsNotAllowed)
+            {
+                //return RedirectToAction("IsNotAllowed", "Account", new { area = "Admin" });
+                string? link = Url.ActionLink("SendValidateMail", "Account", new { area = "Admin" });
 
+                ModelState.AddModelError("UserNotFound", $"Hesabınız henüz doğrulanmamış lütfen mail adresinizi doğrulayın.<a href=\"{link}\">Tekrar Gönder</a>");
+                return View(model);
+            }
 
-            ViewBag.FailLogin = "Veri tabanına kayıt esnasında bir sorun oldu.";
+            ModelState.AddModelError("UserNotFound", "Kullanıcı adı veya şifre yanlış");
             return View(model);
         }
-
-        public IActionResult ForgotPassword()
+    
+        public IActionResult LockOut()
         {
             return View();
         }
-    }
 
-    internal static class Sifreleme
-    {
-        public static string Md5Hash(string text)
+        public IActionResult LoginWith2fa()
         {
-            MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
+            return View();
+        }
 
-            // asd123 => 
-
-            byte[] dizi = Encoding.UTF8.GetBytes(text);
-
-            dizi = md5.ComputeHash(dizi);
-
-            //string passHash = "";
-            StringBuilder sb = new StringBuilder();
-
-            foreach(byte b in dizi)
-            {
-                //passHash += b.ToString("X2").ToLower();
-
-                sb.Append(b.ToString("X2").ToLower());
-            }
-
-            //return passHash;
-
-            return sb.ToString();
+        public IActionResult IsNotAllowed()
+        {
+            return View();
         }
     }
 }

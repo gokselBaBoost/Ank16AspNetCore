@@ -9,7 +9,7 @@
 
         }
 
-        public void Send(string email, string subject, string body)
+        public void Send(string email, string displayName, string subject, string body)
         {
 
             string log = $"{email} - {subject} - {body} mail Hotmail servisinden gönderildi.";

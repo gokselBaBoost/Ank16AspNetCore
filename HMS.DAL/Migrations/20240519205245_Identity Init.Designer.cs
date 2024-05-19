@@ -4,6 +4,7 @@ using HMS.DAL.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HMS.DAL.Migrations
 {
     [DbContext(typeof(HmsDbContext))]
-    partial class HmsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240519205245_Identity Init")]
+    partial class IdentityInit
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -144,10 +147,10 @@ namespace HMS.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "864a906c-b319-4deb-87b6-ce123690bc53",
+                            Id = "36882a8b-7718-411d-aa72-cf0ff723c15e",
                             AccessFailedCount = 0,
                             BirthDate = new DateOnly(2000, 1, 1),
-                            ConcurrencyStamp = "07f05243-956a-41a5-bd40-5e952c8f2629",
+                            ConcurrencyStamp = "4f136cad-2011-4285-a9ba-f2671299e95b",
                             Email = "admin@mail.com",
                             EmailConfirmed = false,
                             Gender = 1,
@@ -155,9 +158,9 @@ namespace HMS.DAL.Migrations
                             Name = "Admin",
                             NormalizedEmail = "ADMIN@MAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEBfHkr7s/F2lHdsHPbU7oTwBHxyzcXXvUWyNgTCjCOJzi8yZjsjxc7hKW3/52nEm6w==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEga2BYGsV5NuNgIFIVKctMA4YwutGkLSpCXBYwon4giB8GL+I22tJJBTO8oeBOGLA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "6f7b8b61-182c-44d8-b4b3-cb683c8f1791",
+                            SecurityStamp = "53e97543-a429-4cca-b922-32fd11302139",
                             Surname = "Admin",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
@@ -345,7 +348,7 @@ namespace HMS.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "48fba63e-ce4c-43c4-97e6-0b48f1157369",
+                            Id = "355bc4a6-465a-4154-a1b8-1a1bdf2d86da",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -440,8 +443,8 @@ namespace HMS.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "864a906c-b319-4deb-87b6-ce123690bc53",
-                            RoleId = "48fba63e-ce4c-43c4-97e6-0b48f1157369"
+                            UserId = "36882a8b-7718-411d-aa72-cf0ff723c15e",
+                            RoleId = "355bc4a6-465a-4154-a1b8-1a1bdf2d86da"
                         });
                 });
 

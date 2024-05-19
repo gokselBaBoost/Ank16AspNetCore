@@ -1,33 +1,44 @@
-﻿@{
+﻿@model LoginViewModel
+@{
     Layout = "_LayoutAccountForm";
     ViewBag.LoginBoxMsg = "Sign in to start your session";
     ViewBag.LoginLink = false;
-    ViewBag.ForgotPasswordLink = true;
-    ViewBag.RegisterLink = true;
+    ViewBag.ForgotPasswordLink = false;
+    ViewBag.RegisterLink = false;
 }
-<h1>@ViewBag.SessionId</h1>
 <form asp-area="Admin" asp-controller="Account" asp-action="Login" method="post">
-    <div class="input-group mb-3">
-        <input name="email" type="email" class="form-control" placeholder="Email">
-        <div class="input-group-append">
-            <div class="input-group-text">
-                <span class="fas fa-envelope"></span>
+    <div asp-validation-summary="All" class="bg-danger"></div>
+    <div class="mb-3">
+        <div class="input-group">
+            <input asp-for="Email" class="form-control" placeholder="Email">
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-envelope"></span>
+                </div>
             </div>
+        </div>
+        <div class="form-text pl-1 text-danger">
+            <span asp-validation-for="Email"></span>
         </div>
     </div>
-    <div class="input-group mb-3">
-        <input name="password" type="password" class="form-control" placeholder="Password">
-        <div class="input-group-append">
-            <div class="input-group-text">
-                <span class="fas fa-lock"></span>
+    <div class="mb-3">
+        <div class="input-group">
+            <input asp-for="Password" class="form-control" placeholder="Password">
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-lock"></span>
+                </div>
             </div>
         </div>
+        <div class="form-text pl-1 text-danger">
+            <span asp-validation-for="Password"></span>
+        </div>        
     </div>
     <div class="row">
         <div class="col-8">
             <div class="icheck-primary">
-                <input type="checkbox" id="remember">
-                <label for="remember">
+                <input asp-for="RememberMe">
+                <label asp-for="RememberMe">
                     Remember Me
                 </label>
             </div>
