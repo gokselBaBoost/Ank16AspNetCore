@@ -85,33 +85,30 @@ namespace Example02.IdentityWebApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UserRoleUpdate(string id, string roleId, bool status)
+        public async Task<IActionResult> UserUpdateRole(string userId, string roleId, bool roleStatus)
         {
-            if(id.IsNullOrEmpty() || roleId.IsNullOrEmpty()) 
-            {
-                return BadRequest("Missing or Empty parameters");
-            }
+            Thread.Sleep(5000);
 
-            IdentityRole? role = await _roleManager.FindByIdAsync(roleId);
+            if (userId.IsNullOrEmpty() || roleId.IsNullOrEmpty())
+                return BadRequest("Hatalı istek");
 
-            if (role == null)
-            {
-                return NotFound("Role is not founded");
-            }
 
-            AppUser? user = await _userManager.FindByIdAsync(id);
+            AppUser? user = _userManager.FindByIdAsync(userId).Result;
 
             if (user == null)
-            {
-                return NotFound("User is not founded");
-            }
+                return NotFound("Kullanıcı bulunamadı.");
 
-            if (status)
+            IdentityRole? role = _roleManager.FindByIdAsync(roleId).Result;
+
+            if(role == null)
+                return NotFound("Role bulunamadı.");
+
+            if (roleStatus)
                 await _userManager.AddToRoleAsync(user, role.Name);
             else
                 await _userManager.RemoveFromRoleAsync(user, role.Name);
 
-            return Ok("The request has been done.");
+            return Ok("İsteğiniz yapıldı");
         }
     }
 }

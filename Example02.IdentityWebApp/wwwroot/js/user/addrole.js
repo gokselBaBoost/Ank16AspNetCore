@@ -1,62 +1,60 @@
 function clearMessage(roleId) {
-    //console.log(roleId);
-    $(`#role-box-${roleId} > strong`).html("");
-    $(`#userRolesError`).html("");
+    var strongMessage = $(`#role-box-${roleId} > strong`);
+    strongMessage.html("");
 }
 
 $(":checkbox").on("change", function () {
 
+    //console.log(this);
+    //console.log($(this));
     var userId = $("#userId").val();
     var roleId = $(this).attr("id");
-    var isChecked = $(this).is(":checked");
+    var isChecked = $(this).is(":checked")
+
+    console.log(userId + " " + roleId + " " + isChecked);
+
+    var strongMessage = $(`#role-box-${roleId} > strong`);
 
     $.ajax({
-        url: $("#userRoles").data("url"),
-        method: "POST",
-        data: { roleId: roleId, status: isChecked },
-        beforeSend: () => { $(`#spinner-${roleId}`).show(); },
-        success: (data, textStatus, xhr) => {
-            //console.log(textStatus);
-            //console.log(data);
-            var strongStatus = $(`#role-box-${roleId} > strong`);
-            strongStatus.html(data);
-            switch (xhr.status) {
-                case 200:
-                    strongStatus.addClass("text-success");
-                    break;
-            }
+        url: "/Role/UserUpdateRole",
+        method:"POST",
+        data: { userId: userId, roleId: roleId, roleStatus: isChecked },
+        beforeSend: function () {
+            console.log("Önce ben çalýþtým");
+            $(`#spinner-${roleId}`).show();
         },
-        error: (xhr, textStatus, errorThrown) => {
-            var strongStatus = $(`#role-box-${roleId} > strong`);
+        success: function (data, textStatus, xhr) {
+            console.log(data);
+            strongMessage.addClass("text-success").html(data);
+        },
+        error: function (xhr, textStatus, errorThrown) {
+            console.log(xhr.status);
+            console.log(xhr.responseText);
             var data = `${xhr.status} : ${xhr.responseText}`;
-            strongStatus.html(data);
+            strongMessage.html(data);
             switch (xhr.status) {
                 case 400:
-                    strongStatus = $(`#userRolesError`);
-                    strongStatus.html(data);
-                    strongStatus.addClass("text-danger");
+                    strongMessage.addClass("text-danger");
                     break;
                 case 404:
-                    strongStatus.addClass("text-warning");
+                    strongMessage.addClass("text-warning");
                     break;
                 case 405:
-                    strongStatus.addClass("text-danger");
+                    strongMessage.addClass("text-info");
                     break;
                 default:
-                    strongStatus.addClass("text-info");
-                    break;
-
+                    strongMessage.addClass("text-primary");
             }
+
         },
-        complete: () => {
+        complete: function () {
             $(`#spinner-${roleId}`).hide();
             setTimeout(`clearMessage('${roleId}')`, 2500);
         }
-    })
-})
+    });
 
-//$(":checkbox").each((index, element) => {
-//    //console.log(index);
-//    console.log($(element).attr("id"));
-//    console.log($(element).is(":checked"));
-//});
+});
+
+function onChagenCheckbox(element) {
+    //login
+}
