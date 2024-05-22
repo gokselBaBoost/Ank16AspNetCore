@@ -1,0 +1,5 @@
+﻿@Example01.WebAPI_HostAddress = https://localhost:7071
+
+GET {{Example01.WebAPI_HostAddress}}/Student/2
+
+###
