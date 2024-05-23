@@ -3,7 +3,7 @@ namespace Example01.WebAPI.Library
 {
     public class VirtualDb
     {
-        private List<Student> _students;
+        private static List<Student> _students;
 
         public VirtualDb()
         {
@@ -25,9 +25,31 @@ namespace Example01.WebAPI.Library
             return _students.Where(s => s.Id == id).SingleOrDefault();
         }
 
-        public void Add(Student student) 
-        { 
+        public int Add(Student student) 
+        {
+            int id = _students.MaxBy(s => s.Id) is not null ? _students.MaxBy(s => s.Id).Id : 0;
+            id++;
+
+            student.Id = id;
+
             _students.Add(student);
+
+            return id;
+        }
+
+        public int Update(int id, Student student)
+        {
+            Student? orginal = _students.Where(s => s.Id == id).SingleOrDefault();
+
+            orginal.Name = student.Name;
+            orginal.Surname = student.Surname;
+            orginal.Email = student.Email;
+
+            _students.Remove(orginal);
+
+            _students.Add(student);
+
+            return id;
         }
 
         public List<Student> GetAll()

@@ -45,7 +45,7 @@ namespace Example02.WebAppToApi.Controllers
         {
             Service1Client service1Client = new Service1Client();
 
-            string result = await service1Client.GetDataAsync(15);
+            string result = await service1Client.GetDataxAsync(15);
 
             CompositeType compositeType = new CompositeType();
             compositeType.BoolValue = true;
